@@ -24,7 +24,7 @@ class EscapesController < ApplicationController
   # POST /escapes
   # POST /escapes.json
   def create
-    @escape = Escape.new(escape_params)
+    @escape = current_user.escapes.new(escape_params)
 
     respond_to do |format|
       if @escape.save
@@ -69,6 +69,6 @@ class EscapesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def escape_params
-      params.require(:escape).permit(:user_id, :title, :contents)
+      params.require(:escape).permit(:title, :contents)
     end
 end
