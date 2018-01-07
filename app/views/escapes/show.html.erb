@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @escape.user %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @escape.title %>
+</p>
+
+<p>
+  <strong>Contents:</strong>
+  <%= @escape.contents %>
+</p>
+
+<%= link_to 'Edit', edit_escape_path(@escape) %> |
+<%= link_to 'Back', escapes_path %>
