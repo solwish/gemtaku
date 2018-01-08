@@ -1,5 +1,6 @@
 class EscapesController < ApplicationController
   before_action :set_escape, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
 
   # GET /escapes
   # GET /escapes.json
@@ -66,6 +67,7 @@ class EscapesController < ApplicationController
     def set_escape
       @escape = Escape.find(params[:id])
     end
+
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def escape_params
