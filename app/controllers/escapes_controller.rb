@@ -68,9 +68,6 @@ class EscapesController < ApplicationController
       @escape = Escape.find(params[:id])
     end
 
-    def authenciticate_user
-
-    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def escape_params
