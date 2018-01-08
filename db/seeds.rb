@@ -10,7 +10,7 @@ User.create(
   email: "test@a.a",
   password: "123123",
   password_confirmation: "123123",
-  nickname: "hey",
+  nickname: "사막여우",
   name: "강동원",
   phone: "010-1234-2143"
 )
@@ -19,6 +19,7 @@ User.create(
   Escape.create(
     title: Faker::Superhero.name,
     contents: Faker::Lorem.paragraphs.join.to_s,
-    user_id: 1
+    user_id: 1,
+    region: "홍대"
   )
 end

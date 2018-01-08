@@ -1,23 +1,22 @@
-<p id="notice"><%= notice %></p>
 
 <h1>Listing Escapes</h1>
 
 <table>
   <thead>
     <tr>
+      <th>#</th>
       <th>User</th>
       <th>Title</th>
-      <th>Contents</th>
       <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @escapes.each do |escape| %>
+    <% @escapes.reverse.each do |escape| %>
       <tr>
-        <td><%= escape.user %></td>
+        <td><%= escape.id %></td>
+        <td><%= escape.user.nickname %></td>
         <td><%= escape.title %></td>
-        <td><%= escape.contents %></td>
         <td><%= link_to 'Show', escape %></td>
         <td><%= link_to 'Edit', edit_escape_path(escape) %></td>
         <td><%= link_to 'Destroy', escape, method: :delete, data: { confirm: 'Are you sure?' } %></td>

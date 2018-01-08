@@ -4,6 +4,7 @@ class CreateEscapes < ActiveRecord::Migration
       t.references :user, index: true, foreign_key: true
       t.string :title
       t.text :contents
+      t.string :region
 
       t.timestamps null: false
     end

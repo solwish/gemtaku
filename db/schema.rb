@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 20180107073045) do
     t.integer  "user_id"
     t.string   "title"
     t.text     "contents"
+    t.string   "region"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
