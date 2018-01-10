@@ -4,6 +4,7 @@
 <table>
   <thead>
     <tr>
+      <th></th>
       <th>Title</th>
       <th>Content</th>
       <th>Region</th>
@@ -14,6 +15,7 @@
   <tbody>
     <% @shops.each do |shop| %>
       <tr>
+        <td><img src="<%= shop.avatar.thumb %>" alt="포스터가 없습니다"></td>
         <td><%= shop.title %></td>
         <td><%= shop.content %></td>
         <td><%= shop.region %></td>

@@ -4,6 +4,7 @@ class CreateShops < ActiveRecord::Migration
       t.string :title
       t.text :content
       t.string :region
+      t.string :avatar
 
       t.timestamps null: false
     end

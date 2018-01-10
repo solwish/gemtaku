@@ -14,5 +14,12 @@
   <%= @shop.region %>
 </p>
 
+<p>
+  <strong>avatar:</strong> <br>
+  <img src="<%= @shop.avatar %>" alt="포스터가 없습니다">
+  <%#= @shop.avatar %>
+</p>
+
+
 <%= link_to 'Edit', edit_shop_path(@shop) %> |
 <%= link_to 'Back', shops_path %>

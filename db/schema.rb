@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20180109120540) do
     t.string   "title"
     t.text     "content"
     t.string   "region"
+    t.string   "avatar"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

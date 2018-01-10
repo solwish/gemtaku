@@ -1,10 +1,13 @@
 source 'https://rubygems.org'
 
+# File uploader
+gem 'carrierwave', '~> 1.0'
+gem "mini_magick"
 # Generate Fake data
 gem 'faker'
 # Pagination
 gem 'kaminari'
-# user devise
+# User devise
 gem 'devise'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.9'
