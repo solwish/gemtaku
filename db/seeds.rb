@@ -14,6 +14,14 @@ User.create(
   name: "강동원",
   phone: "010-1234-2143"
 )
+User.create(
+  email: "adf@adf.com",
+  password: "123123",
+  password_confirmation: "123123",
+  nickname: "adf",
+  name: "adf",
+  phone: "010-1234-2000"
+)
 
 10.times do
   Escape.create(

@@ -1,0 +1,8 @@
+alert("참가버튼 누름");
+$('.join').toggleClass('btn-outline-primary btn-primary');
+  var join_count = parseInt($('#join-count').text());
+    if(<%= @join.frozen? %>){ 
+      $('#join-count').text(join_count - 1);
+    } else {
+      $('#join-count').text(join_count + 1);
+    }
