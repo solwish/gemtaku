@@ -14,7 +14,7 @@
 ActiveRecord::Schema.define(version: 20180109120540) do
 
   create_table "comments", force: :cascade do |t|
-    t.text     "content"
+    t.text     "contents"
     t.integer  "user_id"
     t.integer  "escape_id"
     t.datetime "created_at", null: false
@@ -35,6 +35,8 @@ ActiveRecord::Schema.define(version: 20180109120540) do
   add_index "escapes", ["user_id"], name: "index_escapes_on_user_id"
 
   create_table "joins", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "escape_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

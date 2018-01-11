@@ -14,5 +14,102 @@
   <%= @escape.contents %>
 </p>
 
-<%= link_to 'Edit', edit_escape_path(@escape) %> |
-<%= link_to 'Back', escapes_path %>
+    <%= link_to 'Back', escapes_path %>
+
+  <% if user_signed_in? && @escape.require_permission?(current_user) %>
+    <td><%= link_to "수정하기", edit_escape_path(@escape) %></td>
+    <td><%= link_to "삭제하기", @escape, data: {method: :delete, confirm: 'Are you sure?' } %></td>
+  <% end %>
+
+
+  <!-- 참여하기,참여취소버튼만들어야함  -->
+  <% if @join.length > 0 %>
+    <button type="button" class="join" >참여취소(<span id ="join-count"><%= @escape.joins.count %></span>)</button>
+  <% else %>
+    <button type="button" class="join" >참여하기(<span id ="join-count"><%= @escape.joins.count %></span>)</button>
+  <% end %>
+
+
+  <form id="comment-form">
+   <input id="comment-input" type="text" placeholder="Comment">
+   <button type="submit">댓글등록</button>
+  </form>
+
+  <table>
+    <thead>
+      <tr>
+        <th width="70%">내용</th>
+        <th width="15%"></th>
+        <th width="15%"></th>
+      </tr>
+    </thead>
+    <tbody class="comment-list">
+      <% @escape.comments.reverse.each do |comment| %>
+      <tr id="comment-<%= comment.id%>">
+        <td class="comment" data-id="<%= comment.id %>"><%= comment.contents%></td>
+        <td></td>
+        <td><button class="btn delete-comment" data-id="<%= comment.id %>">삭제</button></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <% content_for :script do %>
+    <script>
+      $(function(){
+        $('.join').on('click', function(){
+          $.ajax({
+            url: "/escapes/<%= @escape.id%>/join",
+            method: "GET"
+          });
+        });
+
+        //댓글작성하기
+        $('#comment-form').on('submit', function(e){
+          e.preventDefault();
+          var data = $('#comment-input').val();
+          $.ajax({
+            url: '/escapes/<%= @escape.id%>/comments',
+            method: 'POST',
+            data: {
+              contents: data
+            }
+          });
+        });
+
+        //댓글삭제하기
+        $('.comment-list').on('click', '.delete-comment', function(){
+          var id = $(this).data('id');
+          $.ajax({
+            url: '/escapes/<%= @escape.id %>/comments/' + id,
+            method: "DELETE"
+          });
+        });
+
+        //댓글수정하기
+        $('.comment-list').on('click','.comment', function(){
+          if ($(this).parents('.comment-list').find('.comment-form').length >0){
+              alert('이미 수정중인 coment가 있습니다');
+              return false;
+          }
+          var text = $(this).text();
+          var id = $(this).data('id');
+          $(this).siblings()[0].innerHTML = '<button class="btn btn-outline-success my-2 my-sm-0 update-comment" type="submit">수정완료</button>';
+          $(this).replaceWith(`<td class="edit-comment"><input class="form-control comment-form" value="${text}"><input class="comment-id" type="hidden" value="${id}"></td>`);
+        });
+        $('.comment-list').on('click', '.update-comment', function(){
+          var updatedcontents = $('.comment-form').val();
+          var id = $('.comment-id').val();
+
+          $.ajax({
+            url: '/escapes/<%= @escape.id %>/comments/' + id,
+            method : 'PATCH',
+            data: {
+              contents: updatedcontents
+            }
+          })
+
+        });
+      })
+    </script>
+  <% end %>

@@ -11,6 +11,11 @@ class EscapesController < ApplicationController
   # GET /escapes/1
   # GET /escapes/1.json
   def show
+    if user_signed_in?
+      @join = Join.where(user_id: current_user.id, escape_id: params[:id])
+    else
+      @join = []
+    end
   end
 
   # GET /escapes/new
@@ -60,6 +65,32 @@ class EscapesController < ApplicationController
       format.html { redirect_to escapes_url, notice: 'Escape was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def join_escape
+    @join = Join.where(user_id: current_user.id, escape_id: params[:escape_id]).first
+    unless @join.nil?
+      @join.destroy
+      puts '참가 취소'
+    else
+      @join = Join.create(user_id: current_user.id, escape_id: params[:escape_id])
+      puts '참여가 완료되었습니다.'
+    end
+    # redirect_to :back
+  end
+
+  def create_comment
+    @comment = Comment.create(user_id: current_user.id, escape_id: params[:id], contents: params[:contents])
+  end
+
+
+  def  delete_comment
+    @comment = Comment.find(params[:comment_id]).destroy
+  end
+
+  def update_comment
+    @comment = Comment.find(params[:comment_id])
+    @comment.update(contents: params[:contents])
   end
 
   private

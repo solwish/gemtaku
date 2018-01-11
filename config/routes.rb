@@ -1,6 +1,17 @@
 Rails.application.routes.draw do
+
   resources :shops
-  resources :escapes
+  resources :escapes do
+    member do
+      post '/comments' => 'escapes#create_comment', as: :create_comment_to
+      delete '/comments/:comment_id' => 'escapes#delete_comment', as: :delete_comment_to
+      patch '/comments/:comment_id' => 'escapes#update_comment', as: :update_comment_to
+    end
+    collection do
+      get '/:escape_id/join' => 'escapes#join_escape'
+    end
+  end
+
   devise_for :users
 
   root 'home#index'
