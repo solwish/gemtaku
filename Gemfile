@@ -1,5 +1,9 @@
 source 'https://rubygems.org'
 
+# AWS for mailer
+gem 'aws-sdk-rails'
+# Figaro for hiding impormation
+gem 'figaro'
 # File uploader
 gem 'carrierwave', '~> 1.0'
 gem "mini_magick"
