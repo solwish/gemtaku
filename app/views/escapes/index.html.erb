@@ -12,7 +12,8 @@
   </thead>
 
   <tbody>
-    <% @escapes.reverse.each do |escape| %>
+
+    <% @escapes.each do |escape| %>
       <tr>
         <td><%= escape.id %></td>
         <td><%= escape.user.nickname %></td>
@@ -28,3 +29,5 @@
 <br>
 
 <%= link_to 'New Escape', new_escape_path %>
+
+<%= paginate @escapes %>

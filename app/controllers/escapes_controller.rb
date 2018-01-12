@@ -5,7 +5,7 @@ class EscapesController < ApplicationController
   # GET /escapes
   # GET /escapes.json
   def index
-    @escapes = Escape.all
+    @escapes = Escape.page(params[:page]).per(20)
   end
 
   # GET /escapes/1
