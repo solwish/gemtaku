@@ -9,7 +9,7 @@
     <%= f.input :password_confirmation, required: true %>
     <%= f.input :name, required: true %>
     <%= f.input :nickname, required: true %>
-    <%= f.input :phone, as: :tel, required: true %>
+    <%= f.input :phone, as: :tel, required: true, :placeholder => "- 없이 숫자만 입력" %>
   </div>
 
   <div class="form-actions">
