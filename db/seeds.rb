@@ -7,25 +7,25 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 User.create(
-  email: "user1@a.a",
+  email: "adf@adf.com",
   password: "123123",
   password_confirmation: "123123",
-  nickname: "사막여우",
-  name: "강동원",
+  nickname: "닉유저",
+  name: "user",
   phone: "01012342143"
 )
 
 User.create(
-  email: "admin@a.a",
+  email: "admin@admin.com",
   password: "123123",
   password_confirmation: "123123",
-  nickname: "관리자",
-  name: "강철비",
+  nickname: "닉관리자",
+  name: "admin",
   phone: "01012342143",
   is_admin?: true
 )
 
-10.times do
+100.times do
   Escape.create(
     title: Faker::Superhero.name,
     contents: Faker::Lorem.paragraphs.join.to_s,
