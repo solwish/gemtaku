@@ -12,7 +12,7 @@ User.create(
   password_confirmation: "123123",
   nickname: "사막여우",
   name: "강동원",
-  phone: "010-1234-2143"
+  phone: "01012342143"
 )
 
 User.create(
@@ -21,7 +21,7 @@ User.create(
   password_confirmation: "123123",
   nickname: "관리자",
   name: "강철비",
-  phone: "010-1234-2143",
+  phone: "01012342143",
   is_admin?: true
 )
 
