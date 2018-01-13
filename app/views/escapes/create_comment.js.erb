@@ -1,11 +1,8 @@
 $('.comment-list').prepend(`
   <tr id="comment-<%= @comment.id%>">
-    <td class="comment" data-id="<%= @comment.id %>"><%= @comment.contents%></td>
+    <td class="comment" data-id="<%= @comment.id %>"><%= @comment.contents %></td>
     <td></td>
-    <td><button class="btn" data-id="<%=@comment.id%>">삭제</button></td>
+    <td><button class="btn delete-comment" data-id="<%=@comment.id%>">삭제</button></td>
   </tr>
   `);
 $('#comment-input').val('');
-
-
-// callbacks을 통해 새로생긴댓글도 바로 지울수있도록 해줘야함

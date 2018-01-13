@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 User.create(
-  email: "adf@adf.com",
+  email: "user1@a.a",
   password: "123123",
   password_confirmation: "123123",
   nickname: "닉유저",
@@ -16,7 +16,7 @@ User.create(
 )
 
 User.create(
-  email: "admin@admin.com",
+  email: "admin@a.a",
   password: "123123",
   password_confirmation: "123123",
   nickname: "닉관리자",
