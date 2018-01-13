@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+# facebook login
+gem 'omniauth-facebook'
 # simple Roles
 gem 'rolify'
 # user authorization
