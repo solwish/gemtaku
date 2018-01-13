@@ -1,6 +1,7 @@
 class EscapesController < ApplicationController
   before_action :set_escape, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
+  load_and_authorize_resource
 
   # GET /escapes
   # GET /escapes.json

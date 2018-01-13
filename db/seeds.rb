@@ -10,8 +10,17 @@ User.create(
   email: "user1@a.a",
   password: "123123",
   password_confirmation: "123123",
-  nickname: "닉유저",
-  name: "user",
+  nickname: "닉유저1",
+  name: "user1",
+  phone: "01012342143"
+)
+
+User.create(
+  email: "user2@a.a",
+  password: "123123",
+  password_confirmation: "123123",
+  nickname: "닉유저2",
+  name: "user2",
   phone: "01012342143"
 )
 
@@ -23,7 +32,7 @@ User.create(
   name: "admin",
   phone: "01012342143",
   # is_admin?: true
-)
+).add_role(:admin)
 
 100.times do
   Escape.create(

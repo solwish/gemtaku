@@ -1,6 +1,7 @@
 class ShopsController < ApplicationController
-  before_action :check_admin_for_shop, except: [:index, :show, :review]
+  # before_action :check_admin_for_shop, except: [:index, :show]
   before_action :set_shop, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /shops
   # GET /shops.json

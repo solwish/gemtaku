@@ -19,8 +19,8 @@
         <td><%= escape.user.nickname %></td>
         <td><%= escape.title %></td>
         <td><%= link_to 'Show', escape %></td>
-        <td><%= link_to 'Edit', edit_escape_path(escape) %></td>
-        <td><%= link_to 'Destroy', escape, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Edit', edit_escape_path(escape) if can? :edit, escape %></td>
+        <td><%= link_to 'Destroy', escape, method: :delete, data: { confirm: 'Are you sure?' } if can? :destroy, escape %></td>
       </tr>
     <% end %>
   </tbody>

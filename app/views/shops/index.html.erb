@@ -20,8 +20,8 @@
         <td><%= shop.content %></td>
         <td><%= shop.region %></td>
         <td><%= link_to 'Show', shop %></td>
-        <td><%= link_to 'Edit', edit_shop_path(shop) if check_admin %></td>
-        <td><%= link_to 'Destroy', shop, method: :delete, data: { confirm: 'Are you sure?' } if check_admin %></td>
+        <td><%= link_to 'Edit', edit_shop_path(shop) if can? :edit, @shop %></td>
+        <td><%= link_to 'Destroy', shop, method: :delete, data: { confirm: 'Are you sure?' } if can? :destroy, @shop %></td>
       </tr>
     <% end %>
   </tbody>
@@ -29,6 +29,6 @@
 
 <br>
 
-<%= link_to 'New Shop', new_shop_path if check_admin %>
+<%= link_to 'New Shop', new_shop_path if can? :create, Shop %>
 
 <%= paginate @shops %>

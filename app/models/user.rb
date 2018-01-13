@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  rolify
+  after_create :assign_default_role
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -17,4 +20,8 @@ class User < ActiveRecord::Base
     validates :name, presence: true, length: {maximum: 50}                        #이름과 이메일이 반드시 존재하고 50,255자를 넘지 않게하는 유효성검사
     validates :email, presence: true, length: {maximum: 255},                     #validates (존재를 확인), presence(오직 하나만 존재),
             format: {with: VALID_EMAIL_REGEX}, uniqueness: {case_sensitive: false} #출처: bambi.tistory.com
+
+  def assign_default_role
+    self.add_role(:newuser) if self.roles.blank?
+  end
 end

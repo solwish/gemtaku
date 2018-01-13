@@ -6,16 +6,17 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   # 어드민인지 체크
-  def check_admin
-    user_signed_in? && current_user.is_admin?
-  end
-  
-  # 가게 정보 올리기 위한 before_action
-  def check_admin_for_shop
-    redirect_to root_path unless check_admin
-  end
+  # cancancan으로 대체
+  # def check_admin
+  #   user_signed_in? && current_user.is_admin?
+  # end
 
-  helper_method :check_admin
+  # 가게 정보 올리기 위한 before_action
+  # def check_admin_for_shop
+  #   redirect_to root_path unless check_admin
+  # end
+
+  # helper_method :check_admin
 
 
   protected
