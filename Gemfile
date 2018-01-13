@@ -1,12 +1,16 @@
 source 'https://rubygems.org'
 
-
+# simple Roles
+gem 'rolify'
+# user authorization
+gem 'cancancan', '~> 2.0'
 # AWS for mailer
 gem 'aws-sdk-rails'
 # Figaro for hiding impormation
 gem 'figaro'
 # File uploader
 gem 'carrierwave', '~> 1.0'
+# image editing
 gem "mini_magick"
 # Generate Fake data
 gem 'faker'
@@ -14,6 +18,7 @@ gem 'faker'
 gem 'kaminari'
 # User devise
 gem 'devise'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.9'
 # Use sqlite3 as the database for Active Record
@@ -64,5 +69,4 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'meta_request'
-  gem 'carrierwave', '~> 1.0'
 end

@@ -22,7 +22,7 @@ User.create(
   nickname: "닉관리자",
   name: "admin",
   phone: "01012342143",
-  is_admin?: true
+  # is_admin?: true
 )
 
 100.times do
