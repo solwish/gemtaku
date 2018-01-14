@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
+
   resources :shops
+  
   resources :escapes do
     member do
       post '/comments' => 'escapes#create_comment', as: :create_comment_to

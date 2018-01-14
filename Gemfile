@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+# admin page
+gem 'activeadmin'
 # facebook login
 gem 'omniauth-facebook'
 # simple Roles

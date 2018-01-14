@@ -44,3 +44,4 @@ User.create(
     region: "홍대"
   )
 end
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
