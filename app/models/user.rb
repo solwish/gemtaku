@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   before_save {self.email = email.downcase}
   VALID_EMAIL_REGEX = /\A([\w+\-]\.?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
   validates :name, presence: true, length: {maximum: 20}, format: {without: /\s/, :message => "can't use space"}
-  validates :nickname, presence: true, length: {maximum: 13}, uniqueness: true, format: {without: /\s/, :message => "can't use space"}
+  validates :nickname, presence: true, length: {maximum: 20}, uniqueness: true, format: {without: /\s/, :message => "can't use space"}
   validates :email, presence: true, length: {maximum: 255},
             format: {with: VALID_EMAIL_REGEX}, uniqueness: {case_sensitive: false}
 
@@ -32,8 +32,9 @@ class User < ActiveRecord::Base
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
-      user.name = auth.info.name   # assuming the user model has a name
-      user.nickname = Faker::Name.unique.name   #위 유효성검사 통과를 위해 faker 변수 사용
+      user.name = auth.info.name.delete(' ')   # assuming the user model has a name
+      user.nickname = Faker::Name.unique.name.delete(' ')   #위 유효성검사 통과를 위해 faker 변수 사용
+      user.gender = auth.extra.raw_info.gender
       # user.image = auth.info.image # assuming the user model has an image
       # If you are using confirmable and the provider(s) you use validate emails,
       # uncomment the line below to skip the confirmation emails.
