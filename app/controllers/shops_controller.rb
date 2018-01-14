@@ -6,7 +6,7 @@ class ShopsController < ApplicationController
   # GET /shops
   # GET /shops.json
   def index
-    @shops = Shop.page(params[:page]).per(5)
+    @shops = Shop.order("created_at DESC").page(params[:page]).per(5)
   end
 
   # GET /shops/1

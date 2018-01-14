@@ -14,22 +14,22 @@
 ActiveRecord::Schema.define(version: 20180114062353) do
 
   create_table "comments", force: :cascade do |t|
-    t.text     "contents"
+    t.text     "contents",   default: "", null: false
     t.integer  "user_id"
     t.integer  "escape_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   add_index "comments", ["user_id"], name: "index_comments_on_user_id"
 
   create_table "escapes", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "title"
-    t.text     "contents"
-    t.string   "region"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "title",      default: "", null: false
+    t.text     "contents",   default: "", null: false
+    t.string   "region",     default: "", null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   add_index "escapes", ["user_id"], name: "index_escapes_on_user_id"
@@ -53,12 +53,12 @@ ActiveRecord::Schema.define(version: 20180114062353) do
   add_index "roles", ["name"], name: "index_roles_on_name"
 
   create_table "shops", force: :cascade do |t|
-    t.string   "title"
-    t.text     "content"
-    t.string   "region"
-    t.string   "avatar"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "title",      default: "", null: false
+    t.text     "content",    default: "", null: false
+    t.string   "region",     default: "", null: false
+    t.string   "avatar",     default: ""
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "users", force: :cascade do |t|

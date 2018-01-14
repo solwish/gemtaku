@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
   #                :length => { :minimum => 10, :maximum => 15 }
 
   before_save {self.email = email.downcase}
+  before_save {self.nickname = nickname.downcase}
   VALID_EMAIL_REGEX = /\A([\w+\-]\.?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
   validates :name, presence: true, length: {maximum: 20}, format: {without: /\s/, :message => "can't use space"}
   validates :nickname, presence: true, length: {maximum: 20}, uniqueness: true, format: {without: /\s/, :message => "can't use space"}
@@ -33,7 +34,7 @@ class User < ActiveRecord::Base
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
       user.name = auth.info.name.delete(' ')   # assuming the user model has a name
-      user.nickname = Faker::Name.unique.name.delete(' ')   #위 유효성검사 통과를 위해 faker 변수 사용
+      user.nickname = Faker::Name.unique.name.delete(' ').downcase   #위 유효성검사 통과를 위해 faker 변수 사용
       user.gender = auth.extra.raw_info.gender
       # user.image = auth.info.image # assuming the user model has an image
       # If you are using confirmable and the provider(s) you use validate emails,

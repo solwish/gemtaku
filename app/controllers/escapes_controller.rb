@@ -6,7 +6,7 @@ class EscapesController < ApplicationController
   # GET /escapes
   # GET /escapes.json
   def index
-    @escapes = Escape.page(params[:page]).per(20)
+    @escapes = Escape.order("created_at DESC").page(params[:page]).per(20)
   end
 
   # GET /escapes/1

@@ -1,6 +1,6 @@
 class Escape < ActiveRecord::Base
   resourcify
-  
+
   belongs_to :user
   has_many :comments
   has_many :joins
@@ -9,4 +9,8 @@ class Escape < ActiveRecord::Base
   def require_permission?(user)
     self.user.id == user.id
   end
+
+  before_save {self.title = title.strip}
+  validates :title, presence: true, length: {minimum: 2, maximum: 50}
+  validates :contents, presence: true, length: {minimum: 2, maximum: 2500}
 end

@@ -14,7 +14,7 @@ class Ability
       can [:update, :destroy], user.escapes
 
       can :create_comment, [Escape, Comment]
-      # can [:update_comment, :delete_comment], [Escape, user.comments]
+      can [:update_comment, :delete_comment], [Escape, user.comments]     #권한 문제 있음 누구나 다 지울 수 있어
       can :join_escape, [Escape, Join]
 
     end
