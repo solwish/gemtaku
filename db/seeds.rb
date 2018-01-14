@@ -11,7 +11,8 @@ User.create(
   password: "123123",
   password_confirmation: "123123",
   nickname: "닉유저1",
-  name: "user1"
+  name: "user1",
+  gender: "male"
 )
 
 User.create(
@@ -19,7 +20,8 @@ User.create(
   password: "123123",
   password_confirmation: "123123",
   nickname: "닉유저2",
-  name: "user2"
+  name: "user2",
+  gender: "female"
 )
 
 User.create(
@@ -27,7 +29,8 @@ User.create(
   password: "123123",
   password_confirmation: "123123",
   nickname: "닉관리자",
-  name: "admin"
+  name: "admin",
+  gender: "male"
 ).add_role(:admin)
 
 100.times do
