@@ -40,8 +40,17 @@ User.create(
   Escape.create(
     title: Faker::Superhero.name,
     contents: Faker::Lorem.paragraphs.join.to_s,
-    user_id: 1,
+    user_id: 1 + rand(2),
     region: "홍대"
   )
 end
+
+# 1000.times do
+#   Comment.create(
+#     contents: Faker::Superhero.name,
+#     user_id: 1 + rand(3),
+#     escape_id: 1 + rand(100)
+#   )
+# end
+
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
