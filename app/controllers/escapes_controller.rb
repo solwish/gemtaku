@@ -81,7 +81,7 @@ class EscapesController < ApplicationController
   end
 
   def create_comment
-    @comment = Comment.create(user_id: current_user.id, escape_id: params[:id], contents: params[:contents])
+    @comment = Comment.create(user_id: current_user.id, escape_id: params[:escape_id], contents: params[:contents])
   end
 
 

@@ -62,7 +62,7 @@
       $(function(){
         $('.join').on('click', function(){
           $.ajax({
-            url: "/escapes/<%= @escape.id%>/join",
+            url: "/escapes/<%= @escape.id %>/join",
             method: "GET"
           });
         });
@@ -72,7 +72,7 @@
           e.preventDefault();
           var data = $('#comment-input').val();
           $.ajax({
-            url: '/escapes/<%= @escape.id%>/comments',
+            url: '/escapes/<%= @escape.id %>/comments',
             method: 'POST',
             data: {
               contents: data

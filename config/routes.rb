@@ -4,14 +4,20 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   resources :shops
-  
+
   resources :escapes do
-    member do
-      post '/comments' => 'escapes#create_comment', as: :create_comment_to
-      delete '/comments/:comment_id' => 'escapes#delete_comment', as: :delete_comment_to
-      patch '/comments/:comment_id' => 'escapes#update_comment', as: :update_comment_to
-    end
+    # resources :comments
+    # member do
+    #   post '/comments' => 'escapes#create_comment', as: :create_comment_to
+    #   delete '/comments/:comment_id' => 'escapes#delete_comment', as: :delete_comment_to
+    #   patch '/comments/:comment_id' => 'escapes#update_comment', as: :update_comment_to
+    # end
     collection do
+
+      post '/:escape_id/comments' => 'escapes#create_comment', as: :create_comment_to
+      delete '/:escape_id/comments/:comment_id' => 'escapes#delete_comment', as: :delete_comment_to
+      patch '/:escape_id/comments/:comment_id' => 'escapes#update_comment', as: :update_comment_to
+
       get '/:escape_id/join' => 'escapes#join_escape'
     end
   end
