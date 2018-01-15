@@ -31,7 +31,6 @@
 
 
   <form id="comment-form">
-    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"/>
     <input id="comment-input" type="text" placeholder="Comment">
     <button type="submit">댓글등록</button>
   </form>
@@ -71,6 +70,7 @@
         $('#comment-form').on('submit', function(e){
           e.preventDefault();
           var data = $('#comment-input').val();
+          debugger;
           $.ajax({
             url: '/escapes/<%= @escape.id %>/comments',
             method: 'POST',

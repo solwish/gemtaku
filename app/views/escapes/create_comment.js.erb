@@ -1,9 +1,13 @@
-$('.comment-list').prepend(`
-  <tr id="comment-<%= @comment.id%>">
-    <td class="comment" data-id="<%= @comment.id %>"><%= @comment.contents %></td>
-    <td></td>
-    <td><%= @comment.user.nickname %></td>
-    <td><button class="btn delete-comment" data-id="<%=@comment.id%>">삭제</button></td>
-  </tr>
-  `);
-$('#comment-input').val('');
+<% if @flag %>
+  $('.comment-list').prepend(`
+    <tr id="comment-<%= @comment.id%>">
+      <td class="comment" data-id="<%= @comment.id %>"><%= @comment.contents %></td>
+      <td></td>
+      <td><%= @comment.user.nickname %></td>
+      <td><button class="btn delete-comment" data-id="<%=@comment.id%>">삭제</button></td>
+    </tr>
+    `);
+  $('#comment-input').val('');
+<% else %>
+  alert("댓글을 최소 1글자 이상 300 이하로 입력해야 합니다.")
+<% end %>
