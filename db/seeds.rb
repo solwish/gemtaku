@@ -45,12 +45,12 @@ User.create(
   )
 end
 
-# 1000.times do
-#   Comment.create(
-#     contents: Faker::Superhero.name,
-#     user_id: 1 + rand(3),
-#     escape_id: 1 + rand(100)
-#   )
-# end
+1000.times do
+  Comment.create(
+    contents: Faker::Superhero.name,
+    user_id: 1 + rand(3),
+    escape_id: 1 + rand(100)
+  )
+end
 
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?

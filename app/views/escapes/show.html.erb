@@ -31,15 +31,17 @@
 
 
   <form id="comment-form">
-   <input id="comment-input" type="text" placeholder="Comment">
-   <button type="submit">댓글등록</button>
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"/>
+    <input id="comment-input" type="text" placeholder="Comment">
+    <button type="submit">댓글등록</button>
   </form>
 
   <table>
     <thead>
       <tr>
-        <th width="70%">내용</th>
+        <th width="60%">내용</th>
         <th width="15%"></th>
+        <th width="10%"></th>
         <th width="15%"></th>
       </tr>
     </thead>
@@ -48,6 +50,7 @@
       <tr id="comment-<%= comment.id%>">
         <td class="comment" data-id="<%= comment.id %>"><%= comment.contents%></td>
         <td></td>
+        <td><%= comment.user.nickname %></td>
         <td><button class="btn delete-comment" data-id="<%= comment.id %>">삭제</button></td>
       </tr>
       <% end %>
@@ -73,6 +76,10 @@
             method: 'POST',
             data: {
               contents: data
+            },
+            headers: {
+              'X-Transaction': 'POST Example',
+              'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
             }
           });
         });
@@ -82,7 +89,11 @@
           var id = $(this).data('id');
           $.ajax({
             url: '/escapes/<%= @escape.id %>/comments/' + id,
-            method: "DELETE"
+            method: "DELETE",
+            headers: {
+              'X-Transaction': 'POST Example',
+              'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+            }
           });
         });
 
@@ -106,6 +117,10 @@
             method : 'PATCH',
             data: {
               contents: updatedcontents
+            },
+            headers: {
+              'X-Transaction': 'POST Example',
+              'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
             }
           })
 
