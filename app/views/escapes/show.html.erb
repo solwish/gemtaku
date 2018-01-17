@@ -106,7 +106,8 @@
 
         //댓글수정하기
         $('.comment-list').on('click','.comment', function(){
-          if('<%= current_user.nickname %>' == $(this).siblings()[1].innerHTML){
+          var nickname = $('.text-welcome')[0].children[0].innerHTML;
+          if(nickname == $(this).siblings()[1].innerHTML){
             if ($(this).parents('.comment-list').find('.comment-form').length >0){
                 alert('이미 수정중인 coment가 있습니다');
                 return false;
@@ -116,7 +117,7 @@
             $(this).siblings()[0].innerHTML = '<button class="btn btn-outline-success my-2 my-sm-0 update-comment" type="submit">수정완료</button>';
             $(this).replaceWith(`<td class="edit-comment"><input class="form-control comment-form" value="${text}"><input class="comment-id" type="hidden" value="${id}"></td>`);
           }else
-            alert("본인만 수정 가능합니다.")
+            alert("본인만 수정 가능합니다.");
         });
         $('.comment-list').on('click', '.update-comment', function(){
           if('<%= current_user %>'){

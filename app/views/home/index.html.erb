@@ -1,5 +1,118 @@
+<!-- EXPLORE -->
+<section>
+<div class="container">
 
 
-  <%= link_to '매장 정보', "/shops" %>
-  <%= link_to '사람구하기', "/escapes" %>
-  <%= link_to '클럽', "/clubs" %>
+<header class="text-center mb-60">
+<h2 class="fs-25">EXPLORE GEMTAKU</h2>
+<p class="fw-300">#방탈출 #사람매칭 #클럽 #커뮤니티</p>
+</header>
+
+
+<div class="row property-item-list">
+
+<div class="col-xs-12 col-md-4 col-sm-6">
+
+  <div class="property-item property-item-box radius-0">
+
+    <!-- IMAGE -->
+    <a class="property-image mb-20" href="<%= shops_path %>">
+
+      <!-- RIBBON -->
+      <div class="property-ribbon">
+        <span class="bg-olive text-white">4 NEW</span>
+      </div>
+
+      <img class="img-fluid lazy" src="assets/images/_smarty/lazy-loadimg.png" data-original="demo_files/images/packs/realestate/gallery/location/loc-1-min.jpg" alt="">
+    </a>
+
+
+    <!-- PRICE and STREET LOCATION -->
+    <h4 class="property-item-price">
+      <small class="float-right text-success">
+        4 NEW
+      </small>
+
+      <strong class="text-primary">
+        Room Escape Cafe
+        <span class="block fw-300 fs-14 text-black">홍대, 신촌, 강남, 건대</span>
+      </strong>
+    </h4>
+
+
+  </div>
+
+</div>
+
+
+
+<div class="col-xs-12 col-md-4 col-sm-6">
+
+  <div class="property-item property-item-box radius-0">
+
+    <!-- IMAGE -->
+    <a class="property-image mb-20" href="<%= escapes_path %>">
+      <img class="img-fluid lazy" src="assets/images/_smarty/lazy-loadimg.png" data-original="demo_files/images/packs/realestate/gallery/location/loc-2-min.jpg" alt="">
+    </a>
+
+
+    <!-- PRICE and STREET LOCATION -->
+    <h4 class="property-item-price">
+      <small class="float-right text-silver">
+        <%= @escape %> posted
+      </small>
+
+      <strong class="text-primary">
+        Matching
+        <span class="block fw-300 fs-14 text-black">다양한 사람과 방탈출을 즐겨보세요</span>
+      </strong>
+    </h4>
+
+
+  </div>
+
+</div>
+
+
+
+<div class="col-xs-12 col-md-4 col-sm-6">
+
+  <div class="property-item property-item-box radius-0">
+
+    <!-- IMAGE -->
+    <a class="property-image mb-20" href="#<%#= clubs_path %>">
+      <img class="img-fluid lazy" src="assets/images/_smarty/lazy-loadimg.png" data-original="demo_files/images/packs/realestate/gallery/location/loc-3-min.jpg" alt="">
+    </a>
+
+
+    <!-- PRICE and STREET LOCATION -->
+    <h4 class="property-item-price">
+      <small class="float-right text-silver">
+        <%#= @club %> CLUBS
+      </small>
+
+      <strong class="text-primary">
+        Clubs
+        <span class="block fw-300 fs-14 text-black">친구들과 정보를 교환해보세요!</span>
+      </strong>
+    </h4>
+
+
+  </div>
+
+</div>
+
+
+</div>
+
+
+<div class="text-center mt-30">
+
+<a href="<%= shops_path %>" class="btn btn-primary bg-black border-black">VIEW ALL CAFES</a>
+
+</div>
+
+
+</div>
+</section>
+<!-- /EXPLORE -->

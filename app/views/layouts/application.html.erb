@@ -9,16 +9,21 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <%= render 'shared/topbar' %>
-  <%= render 'shared/nav' %>
+	<div id="wrapper">
+    <%= render 'shared/topbar' %>
+    <%= render 'shared/nav' %>
 
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
+    <div class="container">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
 
-  <%= yield %>
+      <%= yield %>
+    </div>
 
-  <%= render 'shared/footer' %>
+    <%= render 'shared/footer' %>
 
-  <%= yield :script %>
+    <script type="text/javascript">var plugin_path = 'assets/plugins/';</script>
+    <%= yield :script %>
+
 </body>
 </html>
