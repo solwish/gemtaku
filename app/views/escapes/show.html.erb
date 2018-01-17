@@ -28,13 +28,14 @@
     <button type="button" class="join" >참여하기(<span id ="join-count"><%= @escape.joins.count %></span>)</button>
   <% end %>
 
-
+<% if current_user %>
   <form id="comment-form">
-    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"/>
     <input id="comment-input" type="text" placeholder="Comment">
     <button type="submit">댓글등록</button>
   </form>
-
+<% else %>
+  <p>로그인해야 댓글을 달 수 있습니다.</p>
+<% end %>
   <table>
     <thead>
       <tr>
@@ -46,7 +47,7 @@
     </thead>
     <tbody class="comment-list">
       <% @escape.comments.reverse.each do |comment| %>
-      <tr id="comment-<%= comment.id%>">
+      <tr id="comment-<%= comment.id %>">
         <td class="comment" data-id="<%= comment.id %>"><%= comment.contents%></td>
         <td></td>
         <td><%= comment.user.nickname %></td>
@@ -70,6 +71,7 @@
         $('#comment-form').on('submit', function(e){
           e.preventDefault();
           var data = $('#comment-input').val();
+<<<<<<< HEAD
           var date = new Date();
           var n = date.toDateString();
           var time = date.toLocaleTimeString();
@@ -89,47 +91,71 @@
           console.log(time);
           document.getElementById('time').innerHTML = n + ' ' + time;
           ;
+=======
+          if('<%= current_user %>'){
+            $.ajax({
+              url: '/escapes/<%= @escape.id %>/comments',
+              method: 'POST',
+              data: {
+                contents: data
+              },
+              headers: {
+                // 'X-Transaction': 'POST Example',
+                'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+              }
+            });
+          }else
+            alert("로그인을 해주세요.")
+        });
+>>>>>>> 1b02768ac2855c378a8e90ad7c31902f6610e4de
 
         //댓글삭제하기
         $('.comment-list').on('click', '.delete-comment', function(){
           var id = $(this).data('id');
-          $.ajax({
-            url: '/escapes/<%= @escape.id %>/comments/' + id,
-            method: "DELETE",
-            headers: {
-              'X-Transaction': 'POST Example',
-              'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-            }
-          });
+          if('<%= current_user %>'){
+            $.ajax({
+              url: '/escapes/<%= @escape.id %>/comments/' + id,
+              method: "DELETE",
+              headers: {
+                // 'X-Transaction': 'POST Example',
+                'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+              }
+            });
+          }else
+            alert("로그인을 해주세요.")
         });
       });
         //댓글수정하기
         $('.comment-list').on('click','.comment', function(){
-          if ($(this).parents('.comment-list').find('.comment-form').length >0){
-              alert('이미 수정중인 coment가 있습니다');
-              return false;
-          }
-          var text = $(this).text();
-          var id = $(this).data('id');
-          $(this).siblings()[0].innerHTML = '<button class="btn btn-outline-success my-2 my-sm-0 update-comment" type="submit">수정완료</button>';
-          $(this).replaceWith(`<td class="edit-comment"><input class="form-control comment-form" value="${text}"><input class="comment-id" type="hidden" value="${id}"></td>`);
+          if('<%= current_user.nickname %>' == $(this).siblings()[1].innerHTML){
+            if ($(this).parents('.comment-list').find('.comment-form').length >0){
+                alert('이미 수정중인 coment가 있습니다');
+                return false;
+            }
+            var text = $(this).text();
+            var id = $(this).data('id');
+            $(this).siblings()[0].innerHTML = '<button class="btn btn-outline-success my-2 my-sm-0 update-comment" type="submit">수정완료</button>';
+            $(this).replaceWith(`<td class="edit-comment"><input class="form-control comment-form" value="${text}"><input class="comment-id" type="hidden" value="${id}"></td>`);
+          }else
+            alert("본인만 수정 가능합니다.")
         });
         $('.comment-list').on('click', '.update-comment', function(){
-          var updatedcontents = $('.comment-form').val();
-          var id = $('.comment-id').val();
-
-          $.ajax({
-            url: '/escapes/<%= @escape.id %>/comments/' + id,
-            method : 'PATCH',
-            data: {
-              contents: updatedcontents
-            },
-            headers: {
-              'X-Transaction': 'POST Example',
-              'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-            }
-          })
-
+          if('<%= current_user %>'){
+            var updatedcontents = $('.comment-form').val();
+            var id = $('.comment-id').val();
+            $.ajax({
+              url: '/escapes/<%= @escape.id %>/comments/' + id,
+              method : 'PATCH',
+              data: {
+                contents: updatedcontents
+              },
+              headers: {
+                // 'X-Transaction': 'POST Example',
+                'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+              }
+            })
+          }else
+            alert("로그인을 해주세요.")
         });
       })
     </script>

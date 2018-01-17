@@ -81,17 +81,22 @@ class EscapesController < ApplicationController
   end
 
   def create_comment
-    @comment = Comment.create(user_id: current_user.id, escape_id: params[:escape_id], contents: params[:contents])
+    @comment = Comment.new(user_id: current_user.id, escape_id: params[:escape_id], contents: params[:contents])
+    @flag = false
+    @flag = true if @comment.save
   end
 
 
   def  delete_comment
-    @comment = Comment.find(params[:comment_id]).destroy
+    @comment = Comment.find(params[:comment_id])
+    @flag = false
+    @flag = true if (@comment.user_id == current_user.id) && @comment.destroy
   end
 
   def update_comment
     @comment = Comment.find(params[:comment_id])
-    @comment.update(contents: params[:contents])
+    @flag = false
+    @flag = true if (@comment.user_id == current_user.id) && @comment.update(contents: params[:contents])
   end
 
   private
