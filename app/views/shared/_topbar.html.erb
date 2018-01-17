@@ -1,0 +1,31 @@
+
+<!-- Top Bar -->
+<div id="topBar">
+  <div class="container">
+    <% if user_signed_in? %>
+      <!-- right -->
+      <ul class="top-links list-inline float-right">
+        <li class="text-welcome hidden-xs-down">Welcome to Gemtaku, <strong><%= current_user.nickname %></strong></li>
+        <li>
+          <a class="dropdown-toggle no-text-underline" data-toggle="dropdown" href="#"><i class="fa fa-user hidden-xs-down"></i> MY ACCOUNT</a>
+          <ul class="dropdown-menu float-right">
+            <li><a href="<%=edit_user_registration_path%>"><i class="fa fa-unlock-alt"></i> EDIT USER</a></li>
+            <!-- <li><a href="#"><i class="fa fa-history"></i> BOOKINGS</a></li> -->
+            <!-- <li class="divider"></li> -->
+            <!-- <li><a href="#"><i class="fa fa-edit"></i> MY REVIEWS</a></li> -->
+            <!-- <li><a href="#"><i class="fa fa-cog"></i> MY SETTINGS</a></li> -->
+            <li class="divider"></li>
+            <li><a href="<%= destroy_user_session_path %>" data-method="delete" data-confirm="로그아웃 하시겠습니까??"><i class="glyphicon glyphicon-off"></i> LOGOUT</a></li>
+          </ul>
+        </li>
+      </ul>
+    <% else %>
+      <ul class="top-links list-inline float-right">
+        <li class="text-welcome hidden-xs-down">Welcome to Gemtaku</li>
+        <li><a class="no-text-underline" href="<%= new_user_session_path %>"><i class="fa fa-user"></i> LOG IN</a></li>
+        <li><a class="no-text-underline" href="<%= new_user_registration_path %>"><i class="fa fa-user-plus"></i> SIGN UP</a></li>
+      </ul>
+    <% end %>
+  </div>
+</div>
+<!-- /Top Bar -->

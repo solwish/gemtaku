@@ -1,0 +1,75 @@
+<div id="header" class="navbar-toggleable-md clearfix header-sm sticky disable-uppercase">
+
+<!-- TOP NAV -->
+<header id="topNav">
+  <div class="container">
+
+    <!-- Mobile Menu Button -->
+    <button class="btn btn-mobile" data-toggle="collapse" data-target=".nav-main-collapse">
+      <i class="fa fa-bars"></i>
+    </button>
+
+
+
+    <!-- Logo -->
+    <a class="logo float-left no-text-underline" href="<%= root_path %>">
+      <img src="/images/logo2.png" alt="" />
+    </a>
+
+
+
+    <!--
+      Top Nav
+    -->
+    <div class="navbar-collapse collapse float-right nav-main-collapse p-0">
+      <nav class="nav-main">
+
+        <!--
+          NOTE
+
+          For a regular link, remove "dropdown" class from LI tag and "dropdown-toggle" class from the href.
+          Direct Link Example:
+
+          <li>
+            <a href="#">HOME</a>
+          </li>
+
+          + MENU EFFECTS
+            .nav-animate-fadeIn
+            .nav-animate-fadeInUp
+            .nav-animate-bounceIn
+            .nav-animate-bounceInUp
+            .nav-animate-flipInX
+            .nav-animate-flipInY
+            .nav-animate-zoomIn
+            .nav-animate-slideInUp
+
+            .nav-hover-animate 	= animate text on hover
+
+        -->
+        <ul id="topMain" class="nav nav-pills nav-main nav-animate-fadeIn">
+          <li><!-- ABOUT -->
+            <a href="<%= shops_path %>">
+              방탈출 카페
+            </a>
+          </li>
+          <li><!-- BLOG -->
+            <a href="<%= escapes_path %>">
+              Matching
+            </a>
+          </li>
+          <li><!-- CONTACT -->
+            <a href="<%#= clubs_path %>">
+              Club
+            </a>
+          </li>
+        </ul>
+
+      </nav>
+    </div>
+
+  </div>
+</header>
+<!-- /Top Nav -->
+
+</div>
