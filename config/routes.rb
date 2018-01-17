@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  get 'clubs/index', as: :clubs
+  post 'clubs/talk' => 'clubs#talk'
+
   get 'shops/city' => 'shops#region'
 
   devise_for :admin_users, ActiveAdmin::Devise.config

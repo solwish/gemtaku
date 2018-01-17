@@ -6,6 +6,9 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+Club.create(name: "커뮤니터 1")
+Club.create(name: "커뮤니터 2")
+
 User.create(
   email: "user1@a.a",
   password: "123123",
@@ -13,6 +16,7 @@ User.create(
   nickname: "닉유저1",
   name: "user1",
   gender: "male",
+  club_id: 1,
   confirmed_at: DateTime.now
 )
 
@@ -23,6 +27,18 @@ User.create(
   nickname: "닉유저2",
   name: "user2",
   gender: "female",
+  club_id: 1,
+  confirmed_at: DateTime.now
+)
+
+User.create(
+  email: "user3@a.a",
+  password: "123123",
+  password_confirmation: "123123",
+  nickname: "닉유저3",
+  name: "user3",
+  gender: "female",
+  club_id: 2,
   confirmed_at: DateTime.now
 )
 
@@ -33,6 +49,7 @@ User.create(
   nickname: "닉관리자",
   name: "admin",
   gender: "male",
+  club_id: 2,
   confirmed_at: DateTime.now
 ).add_role(:admin)
 

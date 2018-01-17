@@ -1,0 +1,48 @@
+<h1>Clubs#chat room</h1>
+<p>Find me in app/views/clubs/index.html.erb</p>
+
+<%= form_tag '/talk', method: :get, id: :fo_id do %>
+  <%= text_field_tag :msg %>
+  <%= button_tag :submit, id: :shit, class: "btn btn-primary" %>
+<% end %>
+<div id="talks">
+  <% @talks.each do |talk| %>
+    <p> <%= talk.message %> | <%= talk.user.nickname %> | <%= time_ago_in_words(talk.created_at) %> </p>
+  <% end %>
+</div>
+
+<script>
+  $(function(){
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('19128f57e32f84b22a40', {
+      cluster: 'ap1',
+      encrypted: true
+    });
+
+    $('#shit').on('click', function(e) {
+      e.preventDefault();
+      var data = $('#msg').val();
+      $.ajax({
+        url: 'talk',
+        method: "POST",
+        data: {
+          msg: data
+        },
+        headers: {
+          'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+      $('#msg').val('');
+      $('#msg').focus();
+    })
+    var data = $('#msg').val();
+    var channel = pusher.subscribe('clubchat');
+    var nickname = $('.text-welcome')[0].children[0].innerHTML;
+    channel.bind(`new<%= current_user.club_id %>`, function(data) {
+      console.log(data.message.split('|'));
+      $('#talks').prepend("<p>" + data.message + " | " +"less than a minute" + "</p>");
+    });
+  })
+
+</script>

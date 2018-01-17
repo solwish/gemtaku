@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   has_many :comments
   has_many :escapes
   has_many :joins
+  has_many :talks
+  belongs_to :club
 
   # 폰 유효성검사
   # validates :phone,:presence => true,
