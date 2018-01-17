@@ -11,6 +11,6 @@ class Escape < ActiveRecord::Base
   end
 
   before_save {self.title = title.strip}
-  validates :title, presence: true, length: {minimum: 2, maximum: 50}
+  validates :title, presence: true, length: {minimum: 2, maximum: 100}
   validates :contents, presence: true, length: {minimum: 2, maximum: 2500}
 end
