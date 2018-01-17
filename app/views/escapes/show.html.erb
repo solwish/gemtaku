@@ -22,7 +22,6 @@
   <% end %>
 
 
-  <!-- 참여하기,참여취소버튼만들어야함  -->
   <% if @join.length > 0 %>
     <button type="button" class="join" >참여취소(<span id ="join-count"><%= @escape.joins.count %></span>)</button>
   <% else %>
@@ -60,6 +59,7 @@
 
   <% content_for :script do %>
     <script>
+
       $(function(){
         $('.join').on('click', function(){
           $.ajax({
@@ -67,11 +67,31 @@
             method: "GET"
           });
         });
-
         //댓글작성하기
         $('#comment-form').on('submit', function(e){
           e.preventDefault();
           var data = $('#comment-input').val();
+<<<<<<< HEAD
+          var date = new Date();
+          var n = date.toDateString();
+          var time = date.toLocaleTimeString();
+          $.ajax({
+            url: '/escapes/<%= @escape.id %>/comments',
+            method: 'POST',
+            data: {
+              contents: data
+            },
+            headers: {
+              'X-Transaction': 'POST Example',
+              'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+            }
+          })
+          console.log(date);
+          console.log(n);
+          console.log(time);
+          document.getElementById('time').innerHTML = n + ' ' + time;
+          ;
+=======
           if('<%= current_user %>'){
             $.ajax({
               url: '/escapes/<%= @escape.id %>/comments',
@@ -87,6 +107,7 @@
           }else
             alert("로그인을 해주세요.")
         });
+>>>>>>> 1b02768ac2855c378a8e90ad7c31902f6610e4de
 
         //댓글삭제하기
         $('.comment-list').on('click', '.delete-comment', function(){
@@ -103,7 +124,7 @@
           }else
             alert("로그인을 해주세요.")
         });
-
+      });
         //댓글수정하기
         $('.comment-list').on('click','.comment', function(){
           if('<%= current_user.nickname %>' == $(this).siblings()[1].innerHTML){
