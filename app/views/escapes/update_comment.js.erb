@@ -1,4 +1,3 @@
 alert('댓글수정완료');
 $('.edit-comment').replaceWith(`<td class="comment" data-id="<%= @comment.id %>"><%= @comment.contents%></td>`);
-//3. 완료버튼 삭제
 $('.update-comment').remove();

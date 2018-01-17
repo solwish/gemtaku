@@ -22,7 +22,6 @@
   <% end %>
 
 
-  <!-- 참여하기,참여취소버튼만들어야함  -->
   <% if @join.length > 0 %>
     <button type="button" class="join" >참여취소(<span id ="join-count"><%= @escape.joins.count %></span>)</button>
   <% else %>
@@ -59,6 +58,7 @@
 
   <% content_for :script do %>
     <script>
+
       $(function(){
         $('.join').on('click', function(){
           $.ajax({
@@ -66,11 +66,13 @@
             method: "GET"
           });
         });
-
         //댓글작성하기
         $('#comment-form').on('submit', function(e){
           e.preventDefault();
           var data = $('#comment-input').val();
+          var date = new Date();
+          var n = date.toDateString();
+          var time = date.toLocaleTimeString();
           $.ajax({
             url: '/escapes/<%= @escape.id %>/comments',
             method: 'POST',
@@ -81,8 +83,12 @@
               'X-Transaction': 'POST Example',
               'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
             }
-          });
-        });
+          })
+          console.log(date);
+          console.log(n);
+          console.log(time);
+          document.getElementById('time').innerHTML = n + ' ' + time;
+          ;
 
         //댓글삭제하기
         $('.comment-list').on('click', '.delete-comment', function(){
@@ -96,7 +102,7 @@
             }
           });
         });
-
+      });
         //댓글수정하기
         $('.comment-list').on('click','.comment', function(){
           if ($(this).parents('.comment-list').find('.comment-form').length >0){
