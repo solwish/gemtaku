@@ -2,7 +2,7 @@
   $('.comment-list').prepend(`
     <tr id="comment-<%= @comment.id%>">
       <td class="comment" data-id="<%= @comment.id %>"><%= @comment.contents %></td>
-      <td></td>
+      <td>	less than a minute	</td>
       <td><%= @comment.user.nickname %></td>
       <td><button class="btn delete-comment" data-id="<%=@comment.id%>">삭제</button></td>
     </tr>
