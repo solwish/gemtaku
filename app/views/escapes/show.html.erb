@@ -1,62 +1,105 @@
+<section>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-9 col-sm-9">
+				<h1 class="blog-post-title">
+			      <%= @escape.title %>
+				</h1>
+				<ul class="blog-post-info list-inline">
+					<li>
+							<i class="fa fa-clock-o"></i>
+							<span class="font-lato">June 29, 2017</span>
+					</li>
+					<li>
+							<i class="fa fa-comment-o"></i>
+							<span class="font-lato">28 Comments</span>
+					</li>
+					<li>
+						<i class="fa fa-user"></i><%= @escape.user.nickname %>
+					</li>
+				</ul>
 
-<p>
-  <strong>User:</strong>
-  <%= @escape.user.nickname %>
-</p>
+				<!-- IMAGE -->
+				<!--
+				<figure class="mb-20">
+					<img class="img-fluid" src="demo_files/images/content_slider/10-min.jpg" alt="img" />
+				</figure>
+				-->
+				<!-- /IMAGE -->
 
-<p>
-  <strong>Title:</strong>
-  <%= @escape.title %>
-</p>
+				<!-- VIDEO -->
+				<!--
+				<div class="mb-20 embed-responsive embed-responsive-16by9">
+					<iframe class="embed-responsive-item" src="http://player.vimeo.com/video/8408210" width="800" height="450"></iframe>
+				</div> -->
 
-<p>
-  <strong>Contents:</strong>
-  <%= @escape.contents %>
-</p>
+				<!-- /VIDEO -->
 
-    <%= link_to 'Back', escapes_path %>
+				<%= @escape.contents %>
 
-  <% if user_signed_in? && @escape.require_permission?(current_user) %>
-    <td><%= link_to "수정하기", edit_escape_path(@escape) %></td>
-    <td><%= link_to "삭제하기", @escape, data: {method: :delete, confirm: 'Are you sure?' } %></td>
-  <% end %>
+				<div class="divider divider-dotted">
+					<button type="button" class="btn btn-info"><i class="fa fa-home"></i><%= link_to '홈으로', escapes_path %></button>
+
+		      <% if user_signed_in? && @escape.require_permission?(current_user) %>
+		        <td><%= link_to "수정하기", edit_escape_path(@escape) %></td>
+		        <td><%= link_to "삭제하기", @escape, data: {method: :delete, confirm: 'Are you sure?' } %></td>
+		      <% end %>
+		      <% if @join.length > 0 %>
+		        <button type="button" class="btn btn-danger join" ><i class="fa fa-user-times" aria-hidden="true"></i>참여취소(<span id ="join-count"><%= @escape.joins.count %></span>)</button>
+		      <% else %>
+		        <button type="button" class="btn btn-success join" ><i class="fa fa-users" aria-hidden="true"></i>참여하기(<span id ="join-count"><%= @escape.joins.count %></span>)</button>
+		      <% end %>
+				</div>
+				<br>
+
+				<!-- Form -->
+				<% if current_user %>
+				  <form id="comment-form" class = "comment-form">
+						<div class="row">
+							<div class="col-md-12">
+								<label>COMMENT</label>
+								<textarea required="required" maxlength="3000" rows="3" class="form-control" name="comment" id="comment-input" type="text"></textarea>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<button type = "submit" class="btn btn-3d btn-reveal btn-black">
+									<i class="fa fa-check"></i>
+									<span>SUBMIT MESSAGE</span>
+								</button>
+							</div>
+						</div>
+					</form>
+				<% else %>
+				  <p>로그인해야 댓글을 달 수 있습니다.</p>
+				<% end %>
+				<br>
+
+				<!-- COMMENTS -->
+				<% @escape.comments.reverse.each do |comment| %>
+					<div id="comments-<%= comment.id %>" class="comments">
+						<div class="comment-item">
+							<div class="media-body" data-id="<%= comment.id %>">
+								<h4 class="media-heading bold"><i class="fa fa-user"></i><%= comment.user.nickname %></h4>
+							</div>
+							<small class="block"><%= time_ago_in_words(comment.created_at) %></small>
+						</div>
+						<div class = "comment">
+							<%= comment.contents%>
+						</div>
+						<button class="btn btn-outline-danger delete-comment" data-id="<%= comment.id %>" style="float: right;"><i class="fa fa-trash"></i>삭제</button>
+					</div>
+				<% end %>
+				</div>
+				<!-- /COMMENTS -->
+			</div>
+		</div>
+</section>
 
 
-  <!-- 참여하기,참여취소버튼만들어야함  -->
-  <% if @join.length > 0 %>
-    <button type="button" class="join" >참여취소(<span id ="join-count"><%= @escape.joins.count %></span>)</button>
-  <% else %>
-    <button type="button" class="join" >참여하기(<span id ="join-count"><%= @escape.joins.count %></span>)</button>
-  <% end %>
 
-<% if current_user %>
-  <form id="comment-form">
-    <input id="comment-input" type="text" placeholder="Comment">
-    <button type="submit">댓글등록</button>
-  </form>
-<% else %>
-  <p>로그인해야 댓글을 달 수 있습니다.</p>
-<% end %>
-  <table>
-    <thead>
-      <tr>
-        <th width="60%">내용</th>
-        <th width="15%"></th>
-        <th width="10%"></th>
-        <th width="15%"></th>
-      </tr>
-    </thead>
-    <tbody class="comment-list">
-      <% @escape.comments.reverse.each do |comment| %>
-      <tr id="comment-<%= comment.id %>">
-        <td class="comment" data-id="<%= comment.id %>"><%= comment.contents%></td>
-        <td><%= time_ago_in_words(comment.created_at) %></td>
-        <td><%= comment.user.nickname %></td>
-        <td><button class="btn delete-comment" data-id="<%= comment.id %>">삭제</button></td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
+
+
 
   <% content_for :script do %>
     <script>
@@ -89,7 +132,7 @@
         });
 
         //댓글삭제하기
-        $('.comment-list').on('click', '.delete-comment', function(){
+        $('.comments').on('click', '.delete-comment', function(){
           var id = $(this).data('id');
           if('<%= current_user %>'){
             $.ajax({
@@ -105,10 +148,10 @@
         });
 
         //댓글수정하기
-        $('.comment-list').on('click','.comment', function(){
+        $('.comments').on('click','.comment', function(){
           if('<%= current_user.nickname %>' == $(this).siblings()[1].innerHTML){
-            if ($(this).parents('.comment-list').find('.comment-form').length >0){
-                alert('이미 수정중인 coment가 있습니다');
+            if ($(this).parents('.comments').find('.comment-form').length >0){
+                alert('이미 수정중인 comment가 있습니다');
                 return false;
             }
             var text = $(this).text();
@@ -118,7 +161,7 @@
           }else
             alert("본인만 수정 가능합니다.")
         });
-        $('.comment-list').on('click', '.update-comment', function(){
+        $('.comments').on('click', '.update-comment', function(){
           if('<%= current_user %>'){
             var updatedcontents = $('.comment-form').val();
             var id = $('.comment-id').val();

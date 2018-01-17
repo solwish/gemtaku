@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+gem 'bootstrap'
+gem 'font-awesome-rails'
+gem 'jquery-migrate-rails'
 # admin page
 gem 'activeadmin'
 # facebook login

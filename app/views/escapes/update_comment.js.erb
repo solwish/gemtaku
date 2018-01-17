@@ -2,7 +2,8 @@
   alert('댓글수정완료');
   $('.edit-comment').replaceWith(`<td class="comment" data-id="<%= @comment.id %>"><%= @comment.contents%></td>`);
   //3. 완료버튼 삭제
-  $('.update-comment').remove();
+  // $('.update-comment').remove();
+  $('.update-comment').replaceWith('<td>	Edited	</td>');
 <% else %>
   alert("댓글을 최소 1글자 이상 300 이하로 입력해야 합니다.")
 <% end %>

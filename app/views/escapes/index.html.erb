@@ -12,15 +12,14 @@
   </thead>
 
   <tbody>
-
-    <% @escapes.each do |escape| %>
+    <% @escapes.reverse.each do |escape| %>
       <tr>
         <td><%= escape.id %></td>
         <td><%= escape.user.nickname %></td>
         <td><%= escape.title %></td>
         <td><%= link_to 'Show', escape %></td>
-        <td><%= link_to 'Edit', edit_escape_path(escape) if can? :edit, escape %></td>
-        <td><%= link_to 'Destroy', escape, method: :delete, data: { confirm: 'Are you sure?' } if can? :destroy, escape %></td>
+        <td><%= link_to 'Edit', edit_escape_path(escape) %></td>
+        <td><%= link_to 'Destroy', escape, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -30,4 +29,7 @@
 
 <%= link_to 'New Escape', new_escape_path %>
 
-<%= paginate @escapes %>
+<% content_for :script do %>
+
+  <%= paginate @escapes, remote: true %>
+<% end %>
