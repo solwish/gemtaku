@@ -4,6 +4,7 @@ class ClubsController < ApplicationController
   def index
     if current_user.club_id
       @talks = Talk.where(club_id: current_user.club_id).reverse
+      @cnt = @talks.count
     else
       @talks = []
     end
