@@ -3,6 +3,10 @@ class ShopsController < ApplicationController
   before_action :set_shop, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource
 
+  def region
+    @shops = Shop.where(region: params[:region]).page(params[:page]).per(5)
+    render 'index'
+  end
   # GET /shops
   # GET /shops.json
   def index

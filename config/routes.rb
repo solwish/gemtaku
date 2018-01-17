@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'shops/city' => 'shops#region'
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
