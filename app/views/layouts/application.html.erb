@@ -18,10 +18,7 @@
     gtag('config', 'UA-112089578-2');
   </script>
 </head>
-<body
-  <% if content_for?(:body_attributes) %>
-    <%= yield(:body_attributes) %>
-  <% end %>>
+<body data-no-turbolink="true">
 	<div id="wrapper">
     <%= render 'shared/topbar' %>
     <%= render 'shared/nav' %>
