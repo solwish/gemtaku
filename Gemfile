@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+# real_time club chat
+gem 'pusher'
+# template
 gem 'bootstrap'
 gem 'font-awesome-rails'
 gem 'jquery-migrate-rails'

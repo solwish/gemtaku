@@ -42,7 +42,6 @@
 
 	/* Init */
 	jQuery(window).ready(function () {
-		var plugin_path = '/plugins/'
 
 		// jQuery 3.x do no support size() - should be replaceced with .length
 		// We use this hack to make old plugins working

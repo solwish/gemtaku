@@ -8,11 +8,11 @@
 				<ul class="blog-post-info list-inline">
 					<li>
 							<i class="fa fa-clock-o"></i>
-							<span class="font-lato">June 29, 2017</span>
+							<span class="font-lato"><%= @escape.created_at.strftime('%a, %d %b %Y %H:%M:%S')%></span>
 					</li>
 					<li>
 							<i class="fa fa-comment-o"></i>
-							<span class="font-lato">28 Comments</span>
+							<span class="font-lato"><%= @escape.comments.length%> Comments</span>
 					</li>
 					<li>
 						<i class="fa fa-user"></i><%= @escape.user.nickname %>
@@ -38,14 +38,13 @@
 				<%= @escape.contents %>
 
 				<div class="divider divider-dotted">
-					<button type="button" class="btn btn-info"><i class="fa fa-home"></i><%= link_to '홈으로', escapes_path %></button>
-
+					<%= link_to '<i class="fa fa-home"></i>홈으로'.html_safe , escapes_path,class: 'btn btn-dark'%>
 		      <% if user_signed_in? && @escape.require_permission?(current_user) %>
-		        <td><%= link_to "수정하기", edit_escape_path(@escape) %></td>
-		        <td><%= link_to "삭제하기", @escape, data: {method: :delete, confirm: 'Are you sure?' } %></td>
-		      <% end %>
-		      <% if @join.length > 0 %>
-		        <button type="button" class="btn btn-danger join" ><i class="fa fa-user-times" aria-hidden="true"></i>참여취소(<span id ="join-count"><%= @escape.joins.count %></span>)</button>
+			        <td><%= link_to '<i class="glyphicon glyphicon-edit"></i>수정하기'.html_safe, edit_escape_path(@escape), class:'btn btn-primary' %></td>
+			        <td><%= link_to '<i class="fa fa-trash"></i>삭제하기'.html_safe, @escape, data: {method: :delete, confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
+			      <% end %>
+			      <% if @join.length > 0 %>
+			        <button type="button" class="btn btn-danger join" ><i class="fa fa-user-times" aria-hidden="true"></i>참여취소(<span id ="join-count"><%= @escape.joins.count %></span>)</button>
 		      <% else %>
 		        <button type="button" class="btn btn-success join" ><i class="fa fa-users" aria-hidden="true"></i>참여하기(<span id ="join-count"><%= @escape.joins.count %></span>)</button>
 		      <% end %>
@@ -64,7 +63,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<button type = "submit" class="btn btn-3d btn-reveal btn-black">
-									<i class="fa fa-check"></i>
+									<i class="fa fa-comment"></i>
 									<span>SUBMIT MESSAGE</span>
 								</button>
 							</div>
@@ -80,11 +79,11 @@
 					<div id="comments-<%= comment.id %>" class="comments">
 						<div class="comment-item">
 							<div class="media-body" data-id="<%= comment.id %>">
-								<h4 class="media-heading bold"><i class="fa fa-user"></i><%= comment.user.nickname %></h4>
+								<h4 id="comment-nickname" class="media-heading bold"><i class="fa fa-user"></i><%= comment.user.nickname %></h4>
 							</div>
 							<small class="block"><%= time_ago_in_words(comment.created_at) %></small>
 						</div>
-						<div class = "comment">
+						<div class = "comment" id="<%= comment.id %>">
 							<%= comment.contents%>
 						</div>
 						<button class="btn btn-outline-danger delete-comment" data-id="<%= comment.id %>" style="float: right;"><i class="fa fa-trash"></i>삭제</button>
@@ -149,20 +148,22 @@
 
         //댓글수정하기
         $('.comments').on('click','.comment', function(){
-          if('<%= current_user.nickname %>' == $(this).siblings()[1].innerHTML){
-            if ($(this).parents('.comments').find('.comment-form').length >0){
-                alert('이미 수정중인 comment가 있습니다');
-                return false;
-            }
-            var text = $(this).text();
-            var id = $(this).data('id');
-            $(this).siblings()[0].innerHTML = '<button class="btn btn-outline-success my-2 my-sm-0 update-comment" type="submit">수정완료</button>';
-            $(this).replaceWith(`<td class="edit-comment"><input class="form-control comment-form" value="${text}"><input class="comment-id" type="hidden" value="${id}"></td>`);
-          }else
-            alert("본인만 수정 가능합니다.")
-        });
+						var nickname = $('.text-welcome')[0].children[0].innerHTML;
+						if(nickname == $('#comment-nickname')[0].innerText){
+	            if ($(this).parents('.comments').find('.comment-form').length >0){
+	                alert('이미 수정중인 comment가 있습니다');
+	                return false;
+	            }
+	            var text = $(this).text();
+	            var id = $(this)[0].id;
+	            $(this).siblings()[0].innerHTML = '<button class="btn btn-outline-success my-2 my-sm-0 update-comment" type="submit">수정완료</button>';
+	            $(this).replaceWith(`<td class="edit-comment"><input class="form-control comment-form" value="${text}"><input class="comment-id" type="hidden" value="${id}"></td>`);
+					} else
+							alert("본인만 수정가능합니다.");
+				});
+
         $('.comments').on('click', '.update-comment', function(){
-          if('<%= current_user %>'){
+					if('<%= current_user %>'){
             var updatedcontents = $('.comment-form').val();
             var id = $('.comment-id').val();
             $.ajax({
@@ -176,8 +177,8 @@
                 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
               }
             })
-          }else
-            alert("로그인을 해주세요.")
+					} else
+             alert("로그인을 해주세요.")
         });
       })
     </script>

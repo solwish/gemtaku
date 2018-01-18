@@ -18,3 +18,4 @@
 
 # Ignore application configuration
 /config/application.yml
+/app/views/escapes/show.html.erb

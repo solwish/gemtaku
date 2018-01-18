@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180114141235) do
+ActiveRecord::Schema.define(version: 20180117161807) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -45,6 +45,12 @@ ActiveRecord::Schema.define(version: 20180114141235) do
 
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+
+  create_table "clubs", force: :cascade do |t|
+    t.string   "name",       default: "", null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
 
   create_table "comments", force: :cascade do |t|
     t.text     "contents",   default: "", null: false
@@ -94,12 +100,24 @@ ActiveRecord::Schema.define(version: 20180114141235) do
     t.datetime "updated_at",              null: false
   end
 
+  create_table "talks", force: :cascade do |t|
+    t.string   "message",    default: "", null: false
+    t.integer  "club_id"
+    t.integer  "user_id"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "talks", ["club_id"], name: "index_talks_on_club_id"
+  add_index "talks", ["user_id"], name: "index_talks_on_user_id"
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "name",                   default: "", null: false
     t.string   "nickname",               default: "", null: false
     t.string   "gender",                 default: "", null: false
+    t.integer  "club_id"
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"

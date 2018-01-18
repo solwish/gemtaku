@@ -7,19 +7,38 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+
+  <style>
+  .pag{
+    float: right;
+    position: relative;
+    left: -50%;
+  }
+  </style>
+
 </head>
 <body>
-  <%= render 'shared/topbar' %>
-  <%= render 'shared/nav' %>
-<div class="container">
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
+	<div id="wrapper">
+    <%= render 'shared/topbar' %>
+    <%= render 'shared/nav' %>
 
-  <%= yield %>
-</div>
+    <div class="container">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
 
-  <%= render 'shared/footer' %>
+      <%= yield %>
 
-  <%= yield :script %>
+      <div class="pag">
+        <%= yield :script %>
+      </div>
+    </div>
+
+
+    <%= render 'shared/footer' %>
+
+    <script type="text/javascript">var plugin_path = 'assets/plugins/';</script>
+
+
 </body>
 </html>

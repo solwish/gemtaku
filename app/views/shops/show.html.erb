@@ -1,25 +1,216 @@
 
-<p>
-  <strong>Title:</strong>
-  <%= @shop.title %>
-</p>
-
-<p>
-  <strong>Content:</strong>
-  <%= @shop.content %>
-</p>
-
-<p>
-  <strong>Region:</strong>
-  <%= @shop.region %>
-</p>
-
-<p>
-  <strong>avatar:</strong> <br>
-  <img src="<%= @shop.avatar %>" alt="포스터가 없습니다">
-  <%#= @shop.avatar %>
-</p>
 
 
-<%= link_to 'Edit', edit_shop_path(@shop) if can? :edit, @shop%> |
-<%= link_to 'Back', shops_path %>
+	<!-- SLIDER -->
+	<section id="slider">
+		<img src="<%= @shop.avatar %>"  class="imgLoaded" data-alignment="" data-portrait="" width="1200" height="800" style="visibility: visible;">
+
+		<!-- ribbon -->
+		<div class="property-ribbon">
+			<span class="bg-red text-white">SALE</span>
+			<span class="bg-blue text-white">-10% OFF</span>
+		</div>
+		<!-- /ribbon -->
+
+	</section>
+	<!-- /SLIDER -->
+
+
+
+	<!-- PROPERTY PRICE/INFO -->
+	<section class="page-header page-header-xs light">
+		<div class="container">
+
+			<div class="row">
+
+				<div class="col-md-6">
+
+					<span class="restate-item restate-item-price text-center">
+						14,000 원<i class="text-muted restate-monthly fs-12"> /1인</i>
+						<!-- <a href="#mortgage-calculator" data-toggle="collapse" class="fs-11">MORTGAGE CALCULATOR</a> -->
+						<!--<span class="text-muted fs-11">MONTHLY PRICE</span>-->
+					</span>
+
+					<span class="restate-item text-center">
+						5
+						<span class="text-muted fs-11">ROOMS</span>
+					</span>
+
+					<span class="restate-item text-center">
+						8
+						<span class="text-muted fs-11">Episode</span>
+					</span>
+
+				</div>
+
+
+				<div class="col-md-6 restate-item-buttons m-0-xs">
+
+					<!--
+						+ FULLSCREEN GOOGLE MAP
+							data-lat  = google map latitude
+							data-lng  = google map longitude
+							* used by: assets/js/view/pack_realestate.js
+					-->
+					<a target="_blank" href="https://www.google.com/maps/search/<%= @shop.title %>" class="togglemap btn btn-default btn-sm m-0">
+						<i class="fa fa-map-o"></i>
+						FULLSCREEN MAP
+					</a>
+
+				</div>
+
+			</div>
+
+		</div>
+	</section>
+	<!-- PROPERTY PRICE/INFO -->
+
+
+
+	<!-- FULLSCREEN MAP -->
+	<!-- <div id="map-fullscreen">
+		<button><i class="fa fa-remove"></i> </button>
+		<div id="gmap-init"></div>
+	</div> -->
+	<!-- /FULLSCREEN MAP -->
+
+
+
+
+	<!-- PROPERTY DETAILS -->
+	<section>
+		<div class="container">
+
+			<h2 class="fs-20 mb-20 fw-800">
+				<span class="text-muted fw-300" title="property unique id">Room001</span> <%= @shop.title %>
+				<span class="rating rating-4 fs-15 text-warning"><!-- rating-1 ... rating-5 --></span>
+			</h2>
+
+			<div class="row">
+
+				<div class="col-sm-4">
+
+					<div class="text-black"><span class="text-muted">Location:</span>  <%= @shop.region %> </div>
+					<div class="text-black"><span class="text-muted">Price:</span>  40,000 <span class="text-muted fs-11">/ ROOM</span></div>
+					<!-- <div class="text-black"><span class="text-muted">Minimum Down Payment:</span>  15%</div> -->
+
+				</div>
+
+				<div class="col-sm-4">
+
+					<div class="text-black"><span class="text-muted">Type:</span>  Crime Scene</div>
+					<div class="text-black"><span class="text-muted">Business Hours:</span>  9:00am - 10:00pm</div>
+					<!-- <div class="text-black"><span class="text-muted">Pets:</span>  Allowed</div> -->
+
+				</div>
+
+				<!-- <div class="col-sm-4">
+
+					<div class="text-black"><span class="text-muted">Units in Building:</span>  78</div>
+					<div class="text-black"><span class="text-muted">Building Type:</span>  Highrise</div>
+					<div class="text-black"><span class="text-muted">Floor:</span>  11</div>
+
+				</div> -->
+
+			</div>
+
+
+		</div>
+	</section>
+	<!-- /PROPERTY DETAILS -->
+
+
+
+	<!-- PROPERTY DESCRIPTION -->
+	<section>
+		<div class="container">
+
+			<!-- <h2 class="fs-20 fw-800">
+				<span class="text-muted fw-300" title="property unique id">RE001</span> PROPERTY DESCRIPTION
+			</h2> -->
+
+
+			<div class="row">
+
+				<div class="col-sm-8">
+					<p><%= @shop.content %></p>
+				</div>
+
+				<div class="col-sm-4 m-0-xs">
+					<h3 class="fs-16 fw-800">PROPERTY IMAGES</h3>
+
+					<div class="row lightbox" data-plugin-options='{"delegate": "a", "gallery": {"enabled": true}}'>
+
+						<div class="col-xs-6 col-md-6 col-lg-6 mb-30">
+							<a href="<%= @shop.avatar.thumb %>" class="image-hover-plus image-hover-overlay">
+								<i class="icon-hover-plus"></i>
+								<img class="img-fluid" src=" <%= @shop.avatar.thumb %> " alt="">
+							</a>
+						</div>
+
+						<div class="col-xs-6 col-md-6 col-lg-6 mb-30">
+							<a href="<%= @shop.avatar.thumb %>" class="image-hover-plus image-hover-overlay">
+								<i class="icon-hover-plus"></i>
+								<img class="img-fluid" src="<%= @shop.avatar.thumb %>" alt="">
+							</a>
+						</div>
+
+						<!-- <div class="col-xs-6 col-md-6 col-lg-6 mb-30">
+							<a href="demo_files/images/packs/realestate/gallery-item/5-min.jpg" class="image-hover-plus image-hover-overlay">
+								<i class="icon-hover-plus"></i>
+								<img class="img-fluid" src="demo_files/images/packs/realestate/gallery-item/5-min.jpg" alt="">
+							</a>
+						</div>
+
+						<div class="col-xs-6 col-md-6 col-lg-6 mb-30">
+							<a href="demo_files/images/packs/realestate/gallery-item/3-min.jpg" class="image-hover-plus image-hover-overlay">
+								<i class="icon-hover-plus"></i>
+								<img class="img-fluid" src="demo_files/images/packs/realestate/gallery-item/3-min.jpg" alt="">
+							</a>
+						</div> -->
+
+					</div>
+
+
+					<div class="row restate-item-buttons m-0-xs">
+
+						<div class="col-md-6 mb-10">
+
+							<!--
+								+ FULLSCREEN GOOGLE MAP
+									data-lat  = google map latitude
+									data-lng  = google map longitude
+									* used by: assets/js/view/pack_realestate.js
+							-->
+							<a target="_blank" href="https://www.google.com/maps/search/<%= @shop.title %>" class="togglemap btn btn-default btn-block  m-0">
+								<i class="fa fa-map-o"></i>
+								MAP
+							</a>
+
+						</div>
+
+						<div class="col-md-6 mb-10">
+
+							<!-- FLOOR PLAN -->
+							<!-- <a href="demo_files/images/packs/realestate/floorplan.jpg" class="btn btn-default btn-block m-0 lightbox" data-plugin-options='{"type":"image"}'>
+								<i class="fa fa-university"></i>
+								FLOORPLAN
+							</a> -->
+
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+
+		</div>
+	</section>
+	<!-- /PROPERTY DESCRIPTION -->
+
+
+
+<%= link_to 'Edit', edit_shop_path(@shop), class: "togglemap btn btn-default btn-block  m-0" if can? :edit, @shop%>
+<%= link_to 'Back', shops_path, class: "togglemap btn btn-default btn-block  m-0" %>

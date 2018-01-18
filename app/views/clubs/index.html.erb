@@ -1,0 +1,163 @@
+<!-- COMMENTS -->
+<div id="comments" class="comments">
+
+  <h3 class="page-header mb-60 fs-20">
+    <span>#<%= current_user.club.name %></span> CLUB <span><%= @cnt %></span> TALKS
+  </h3>
+
+
+  <h4 class="page-header fs-20 mb-60 mt-100">
+    LEAVE A <span>COMMENT</span>
+  </h4>
+
+  <!-- Form -->
+
+  <form action="/talk" method="post">
+
+    <div class="row">
+      <div class="col-md-8">
+        <label>COMMENT</label>
+        <input type="text" id="msg" required="required" maxlength="5000" rows="5" class="form-control" name="msg" id="comment" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+
+        <button id="clubmsg" class="btn btn-3d btn-lg btn-reveal btn-black">
+          <i class="fa fa-check"></i>
+          <span>SUBMIT MESSAGE</span>
+        </button>
+
+      </div>
+    </div>
+
+  </form>
+  <!-- /Form -->
+
+  <!-- First Comment -->
+  <div id="talks" class="comment-list">
+
+    <% @talks.each do |talk| %>
+      <% if talk.user_id == current_user.id %>
+        <div class="row">
+          <div class="col-md-8 col-sm-8">
+            <div class="card card-default arrow left">
+              <div class="card-block">
+                <header class="text-left">
+                  <div class="comment-user"><i class="fa fa-user"></i> <%= talk.user.nickname %></div>
+                  <span class="comment-date"><i class="fa fa-clock-o"></i> <%= time_ago_in_words(talk.created_at) %></span>
+                </header>
+                <div class="comment-post">
+                  <p>
+                    <i class="fa fa-comment"></i>
+                    <strong><%= talk.message %></strong>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% else %>
+
+        <!-- Third Comment -->
+        <div class="row">
+        <div class="col-md-8 col-sm-8">
+          <div class="card card-default arrow right">
+            <div class="card-block">
+              <header class="text-right">
+                <div class="comment-user"><i class="fa fa-user"></i> <%= talk.user.nickname %></div>
+                <span class="comment-date"><i class="fa fa-clock-o"></i> <%= time_ago_in_words(talk.created_at) %></span>
+              </header>
+              <div class="comment-post text-right">
+                <p>
+                  <%= talk.message %>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    <% end %>
+  </div>
+
+
+</div>
+<!-- /COMMENTS -->
+
+<script>
+  $(function(){
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('19128f57e32f84b22a40', {
+      cluster: 'ap1',
+      encrypted: true
+    });
+
+    $('#clubmsg').on('click', function(e) {
+      e.preventDefault();
+      var data = $('#msg').val();
+      if (!(data.trim().length < 1))
+      $.ajax({
+        url: 'talk',
+        method: "POST",
+        data: {
+          msg: data
+        },
+        headers: {
+          'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+      $('#msg').val('');
+      $('#msg').focus();
+    })
+    var data = $('#msg').val();
+    var channel = pusher.subscribe('clubchat');
+    channel.bind(`new<%= current_user.club_id %>`, function(data) {
+      var data = data.message.split('|');
+      var msg = data[0];
+      var nickname = data[1].trim();
+      var myname = $('.text-welcome')[0].children[0].innerHTML;
+      if(nickname == myname){
+        $('#talks').prepend(`<div class="row">
+                              <div class="col-md-8 col-sm-8">
+                                <div class="card card-default arrow left">
+                                  <div class="card-block">
+                                    <header class="text-left">
+                                      <div class="comment-user"><i class="fa fa-user"></i> ${nickname}</div>
+                                      <span class="comment-date"><i class="fa fa-clock-o"></i> less than a minute</span>
+                                    </header>
+                                    <div class="comment-post">
+                                      <p>
+                                        <i class="fa fa-comment"></i>
+                                        <strong>${msg}</strong>
+                                      </p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>`);
+        }else {
+          $('#talks').prepend(`<div class="row">
+                                <div class="col-md-8 col-sm-8">
+                                  <div class="card card-default arrow right">
+                                    <div class="card-block">
+                                      <header class="text-right">
+                                        <div class="comment-user"><i class="fa fa-user"></i> ${nickname}</div>
+                                        <span class="comment-date"><i class="fa fa-clock-o"></i> less than a minute</span>
+                                      </header>
+                                      <div class="comment-post text-right">
+                                        <p>
+                                          ${msg}
+                                        </p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>`);
+        }
+    });
+  })
+
+</script>

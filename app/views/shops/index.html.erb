@@ -1,34 +1,150 @@
 
-<h1>Listing Shops</h1>
+<!-- FEATURED -->
+<section class="alternate">
+  <div class="container">
 
-<table>
-  <thead>
-    <tr>
-      <th></th>
-      <th>Title</th>
-      <th>Content</th>
-      <th>Region</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @shops.each do |shop| %>
-      <tr>
-        <td><img src="<%= shop.avatar.thumb %>" alt="포스터가 없습니다"></td>
-        <td><%= shop.title %></td>
-        <td><%= shop.content %></td>
-        <td><%= shop.region %></td>
-        <td><%= link_to 'Show', shop %></td>
-        <td><%= link_to 'Edit', edit_shop_path(shop) if can? :edit, @shop %></td>
-        <td><%= link_to 'Destroy', shop, method: :delete, data: { confirm: 'Are you sure?' } if can? :destroy, @shop %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    <header class="text-center mb-60">
+      <h2 class="fs-25">Listing Shops</h2>
+      <p class="fw-300">#홍대 #신촌 #강남 #건대</p>
+    </header>
+
+
+    <div class="row property-item-list">
+
+      <div class="col-xs-12 col-sm-6">
+
+        <div class="property-item property-item-box">
+          <!-- LEFT COLUMN -->
+          <div class="col-xs-12 order-lg-1 order-md-1 mb-0">
+
+            <div class="restate-box-search p-20">
+
+              <h2 class="restate-box-title mb-30 block">
+                <i class="fa fa-search text-silver"></i> &nbsp;
+                LOCATION SEARCH
+              </h2>
+
+              <form class="m-0" action="/shops/city" method="get">
+
+
+                <div class="row">
+
+                  <div class="col-md-12">
+
+                    <select class="form-control select2" name="region">
+                      <option value="" disabled="disabled">Please, select a city.</option>
+                      <option value="홍대">홍대</option>
+                      <option value="신촌">신촌</option>
+                      <option value="강남">강남</option>
+                      <option value="건대">건대</option>
+                      <!-- <option value="5">The Hamptons</option>
+                      <option value="6">Los Angeles &amp; Orange County</option>
+                      <option value="7">Santa Barbara &amp; Montecito</option>
+                      <option value="8">Aspen</option>
+                      <option value="9">San Francisco Bay Area</option> -->
+                    </select>
+
+                  </div>
+
+                </div>
+
+
+
+                <div class="row">
+                  <div class="col-md-12">
+
+                    <div class="">
+
+                        <button class="btn btn-primary" type="submit">GO</button>
+
+                    </div>
+
+                  </div>
+                </div>
+
+              </form>
+
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <% @shops.each do |shop| %>
+
+      <div class="col-xs-12 col-sm-6">
+
+        <!--
+          # PROPERTY ITEM
+
+            .property-item-box 			= boxed item (use it with bootstrap grid)
+            .b-0 					= clean, unbordered item (use it woth .property-item-box  only)
+
+            .property-featured-blue		= blue featured color
+            .property-featured-yellow	= yellow featured color
+            .property-featured-green	= green featured color
+        -->
+        <div class="property-item property-item-box">
+
+          <!-- IMAGE -->
+          <a class="property-image" href="/shops/<%= shop.id %>">
+            <img class="img-fluid" src="<%= shop.avatar.thumb %>" alt="해당 카페는 이미지가 없습니다.">
+          </a>
+
+
+          <!-- PRICE and STREET LOCATION -->
+          <h4 class="property-item-price">
+            <!-- <strong class="text-primary">
+              $1,595,000
+            </strong> -->
+
+            <small class="float-right text-danger">
+              <%= shop.region %>
+            </small>
+          </h4>
+
+          <!-- DETAILED LOCATION -->
+          <strong class="poperty-item-location fs-16 text-black">
+            <%= shop.title %>
+          </strong>
+
+          <!-- FEATURES -->
+                    <ul class="property-item-features list-inline mb-0">
+                        <li>#크라임 씬</li>
+
+                        <li style="list-style: none">|</li>
+
+                        <li>#테마</li>
+
+                        <li style="list-style: none">|</li>
+
+                        <li>#연인</li>
+                    </ul>
+
+        </div>
+
+      </div>
+
+      <% end %>
+
+    </div>
+
+    <div class="text-center mt-30">
+
+      <a href="#" class="btn btn-primary bg-black border-black">더보기</a>
+
+    </div>
+
+  </div>
+      </section>
+      <!-- /FEATURED -->
 
 <br>
 
-<%= link_to 'New Shop', new_shop_path if can? :create, Shop %>
+<%= link_to 'New Shop', new_shop_path, class: "btn btn-black" if can? :create, Shop %>
 
 <%= paginate @shops %>
