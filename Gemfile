@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+# s3
+gem 'fog'
 # real_time club chat
 gem 'pusher'
 # template
