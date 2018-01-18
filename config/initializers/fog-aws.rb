@@ -5,5 +5,5 @@ CarrierWave.configure do |config|
     aws_secret_access_key: ENV['AWS_SECRET'],
     region:                'ap-northeast-2'
   }
-  config.fog_directory  = '(앞서 설정한 bucket 이름)'
+  config.fog_directory  = 'gemtaku'
 end
