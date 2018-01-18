@@ -7,6 +7,7 @@ gem 'pusher'
 # template
 gem 'bootstrap'
 gem 'font-awesome-rails'
+gem 'jquery-migrate-rails'
 # admin page
 gem 'activeadmin'
 # facebook login

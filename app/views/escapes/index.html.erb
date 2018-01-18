@@ -4,19 +4,21 @@
 <table>
   <thead>
     <tr>
-      <th>#</th>
-      <th>Title</th>
-      <th>User</th>
+      <th width="10%">글번호</th>
+      <th width="60%">제목</th>
+      <th width="10%">닉네임</th>
+      <th width="20%">글쓴시간</th>
+      <th colspan="4"></th>
     </tr>
   </thead>
 
   <tbody>
-
-    <% @escapes.each do |escape| %>
+    <% @escapes.reverse.each do |escape| %>
       <tr>
-        <td><%= escape.id %></td>
-        <td><%= link_to escape.title, escape %></td>
-        <td><%= escape.user.nickname %></td>
+        <td><br><%= escape.id %></td>
+        <td><br><%= link_to escape.title, escape %></td>
+        <td><br><%= escape.user.nickname %></td>
+        <td><br><%= escape.created_at.strftime('%a, %d %b %Y %H:%M:%S')%></td>
       </tr>
     <% end %>
   </tbody>
@@ -24,6 +26,8 @@
 
 <br>
 
-<%= link_to 'New Escape', new_escape_path %>
+<%= link_to '<i class = "glyphicon glyphicon-pencil"></i>New Escape'.html_safe, new_escape_path, class: 'btn btn-info' %>
 
-<%= paginate @escapes %>
+<% content_for :script do %>
+  <%= paginate @escapes %>
+<% end %>
