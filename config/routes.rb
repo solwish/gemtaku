@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   get 'clubs/index', as: :clubs
   post 'clubs/talk' => 'clubs#talk'
+  get 'clubs/update/:id' => 'clubs#update'
 
   get 'shops/city' => 'shops#region'
 

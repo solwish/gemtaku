@@ -1,6 +1,12 @@
 class ClubsController < ApplicationController
   before_action :authenticate_user!
 
+  def update
+    user = User.find(current_user.id)
+    user.update(club_id: params[:id])
+    redirect_to clubs_path
+  end
+
   def index
     if current_user.club_id
       @talks = Talk.where(club_id: current_user.club_id).reverse
