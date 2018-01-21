@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
-      user.password = user.email
+      user.password = user.email#Devise.friendly_token[0,20]
       user.password_confirmation = user.email
       user.name = auth.info.name.delete(' ')   # assuming the user model has a name
       user.nickname = Faker::Name.unique.name.delete(' ').downcase   #위 유효성검사 통과를 위해 faker 변수 사용

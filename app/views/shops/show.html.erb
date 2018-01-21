@@ -1,6 +1,4 @@
 
-
-
 	<!-- SLIDER -->
 	<section id="slider">
 		<img src="<%= @shop.avatar %>"  class="imgLoaded" data-alignment="" data-portrait="" width="1200" height="800" style="visibility: visible;">
@@ -52,7 +50,7 @@
 							data-lng  = google map longitude
 							* used by: assets/js/view/pack_realestate.js
 					-->
-					<a target="_blank" href="https://www.google.com/maps/search/<%= @shop.title %>" class="togglemap btn btn-default btn-sm m-0">
+					<a target="_blank" href="https://www.google.com/maps/search/<%= @shop.title %>" class="btn btn-default btn-sm m-0">
 						<i class="fa fa-map-o"></i>
 						FULLSCREEN MAP
 					</a>
@@ -64,17 +62,6 @@
 		</div>
 	</section>
 	<!-- PROPERTY PRICE/INFO -->
-
-
-
-	<!-- FULLSCREEN MAP -->
-	<!-- <div id="map-fullscreen">
-		<button><i class="fa fa-remove"></i> </button>
-		<div id="gmap-init"></div>
-	</div> -->
-	<!-- /FULLSCREEN MAP -->
-
-
 
 
 	<!-- PROPERTY DETAILS -->
@@ -182,7 +169,7 @@
 									data-lng  = google map longitude
 									* used by: assets/js/view/pack_realestate.js
 							-->
-							<a target="_blank" href="https://www.google.com/maps/search/<%= @shop.title %>" class="togglemap btn btn-default btn-block  m-0">
+							<a target="_blank" href="https://www.google.com/maps/search/<%= @shop.title %>" class="btn btn-default btn-block  m-0">
 								<i class="fa fa-map-o"></i>
 								MAP
 							</a>
@@ -212,5 +199,5 @@
 
 
 
-<%= link_to 'Edit', edit_shop_path(@shop), class: "togglemap btn btn-default btn-block  m-0" if can? :edit, @shop%>
-<%= link_to 'Back', shops_path, class: "togglemap btn btn-default btn-block  m-0" %>
+<%= link_to 'Edit', edit_shop_path(@shop), class: "btn btn-default btn-block  m-0" if can? :edit, @shop%>
+<%= link_to 'Back', shops_path, class: "btn btn-default btn-block  m-0" %>
