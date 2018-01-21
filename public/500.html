@@ -1,154 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<title>Smarty - Multipurpose + Admin</title>
-		<meta name="description" content="" />
-		<meta name="Author" content="Dorin Grigoras [www.stepofweb.com]" />
+<html>
+<head>
+  <title>We're sorry, but something went wrong (500)</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+  body {
+    background-color: #EFEFEF;
+    color: #2E2F30;
+    text-align: center;
+    font-family: arial, sans-serif;
+    margin: 0;
+  }
 
-		<!-- mobile settings -->
-		<meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
-		<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+  div.dialog {
+    width: 95%;
+    max-width: 33em;
+    margin: 4em auto 0;
+  }
 
-		<!-- WEB FONTS : use %7C instead of | (pipe) -->
-		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600%7CRaleway:300,400,500,600,700%7CLato:300,400,400italic,600,700" rel="stylesheet" type="text/css" />
+  div.dialog > div {
+    border: 1px solid #CCC;
+    border-right-color: #999;
+    border-left-color: #999;
+    border-bottom-color: #BBB;
+    border-top: #B00100 solid 4px;
+    border-top-left-radius: 9px;
+    border-top-right-radius: 9px;
+    background-color: white;
+    padding: 7px 12% 0;
+    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
+  }
 
-		<!-- CORE CSS -->
-		<link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  h1 {
+    font-size: 100%;
+    color: #730E15;
+    line-height: 1.5em;
+  }
 
-		<!-- THEME CSS -->
-		<link href="assets/css/essentials.css" rel="stylesheet" type="text/css" />
-		<link href="assets/css/layout.css" rel="stylesheet" type="text/css" />
+  div.dialog > p {
+    margin: 0 0 1em;
+    padding: 1em;
+    background-color: #F7F7F7;
+    border: 1px solid #CCC;
+    border-right-color: #999;
+    border-left-color: #999;
+    border-bottom-color: #999;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-top-color: #DADADA;
+    color: #666;
+    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
+  }
+  </style>
+</head>
 
-		<!-- PAGE LEVEL SCRIPTS -->
-		<link href="assets/css/header-1.css" rel="stylesheet" type="text/css" />
-		<link href="assets/css/color_scheme/green.css" rel="stylesheet" type="text/css" id="color_scheme" />
-	</head>
-
-	<!--
-		AVAILABLE BODY CLASSES:
-
-		smoothscroll 			= create a browser smooth scroll
-		enable-animation		= enable WOW animations
-
-		bg-grey					= grey background
-		grain-grey				= grey grain background
-		grain-blue				= blue grain background
-		grain-green				= green grain background
-		grain-blue				= blue grain background
-		grain-orange			= orange grain background
-		grain-yellow			= yellow grain background
-
-		boxed 					= boxed layout
-		pattern1 ... patern11	= pattern background
-		menu-vertical-hide		= hidden, open on click
-
-		BACKGROUND IMAGE [together with .boxed class]
-		data-background="assets/images/_smarty/boxed_background/1.jpg"
-	-->
-	<body class="smoothscroll enable-animation">
-
-		<!-- SLIDE TOP -->
-		<div id="slidetop">
-
-			<div class="container">
-
-				<div class="row">
-
-					<div class="col-md-4">
-						<h6><i class="icon-heart"></i> WHY SMARTY?</h6>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas metus nulla, commodo a sodales sed, dignissim pretium nunc. Nam et lacus neque. Ut enim massa, sodales tempor convallis et, iaculis ac massa. </p>
-					</div>
-
-					<div class="col-md-4">
-						<h6><i class="fa-facheck"></i> RECENTLY VISITED</h6>
-						<ul class="list-unstyled">
-							<li><a href="#"><i class="fa fa-angle-right"></i> Consectetur adipiscing elit amet</a></li>
-							<li><a href="#"><i class="fa fa-angle-right"></i> This is a very long text, very very very very very very very very very very very very </a></li>
-							<li><a href="#"><i class="fa fa-angle-right"></i> Lorem ipsum dolor sit amet</a></li>
-							<li><a href="#"><i class="fa fa-angle-right"></i> Dolor sit amet,consectetur adipiscing elit amet</a></li>
-							<li><a href="#"><i class="fa fa-angle-right"></i> Consectetur adipiscing elit amet,consectetur adipiscing elit</a></li>
-						</ul>
-					</div>
-
-					<div class="col-md-4">
-						<h6><i class="icon-envelope"></i> CONTACT INFO</h6>
-						<ul class="list-unstyled">
-							<li><b>Address:</b> PO Box 21132, Here Weare St, <br /> Melbourne, Vivas 2355 Australia</li>
-							<li><b>Phone:</b> 1-800-565-2390</li>
-							<li><b>Email:</b> <a href="mailto:support@yourname.com">support@yourname.com</a></li>
-						</ul>
-					</div>
-
-				</div>
-
-			</div>
-
-			<a class="slidetop-toggle" href="#"><!-- toggle button --></a>
-
-		</div>
-		<!-- /SLIDE TOP -->
-
-
-		<!-- wrapper -->
-		<div id="wrapper">
-
-			<section class="page-header">
-				<div class="container">
-
-					<h1>INTERNAL ERROR</h1>
-
-					<!-- breadcrumbs -->
-					<ol class="breadcrumb">
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Pages</a></li>
-						<li class="active">Error 500</li>
-					</ol><!-- /breadcrumbs -->
-
-				</div>
-			</section>
-			<!-- /PAGE HEADER -->
-
-
-
-
-			<!-- -->
-			<section>
-				<div class="container">
-
-					<h2><strong>500 Internal Server Error</strong></h2>
-
-					<p>The Web server (running the Web Site) encountered an unexpected condition that prevented it from fulfilling the request by the client (e.g. your Web browser or our CheckUpDown robot) for access to the requested URL.</p>
-					<p>This error can only be resolved by fixes to the Web server software. It is not a client-side problem. It is up to the operators of the Web server site to locate and analyse the logs which should give further information about the error.</p>
-				</div>
-			</section>
-			<!-- / -->
-
-
-
-		</div>
-		<!-- /wrapper -->
-
-
-		<!-- SCROLL TO TOP -->
-		<a href="#" id="toTop"></a>
-
-
-		<!-- PRELOADER -->
-		<div id="preloader">
-			<div class="inner">
-				<span class="loader"></span>
-			</div>
-		</div><!-- /PRELOADER -->
-
-
-		<!-- JAVASCRIPT FILES -->
-		<script type="text/javascript">var plugin_path = '/custom/assets/plugins/';</script>
-		<script type="text/javascript" src="assets/plugins/jquery/jquery-3.2.1.min.js"></script>
-
-		<script type="text/javascript" src="assets/js/scripts.js"></script>
-
-		<!-- STYLESWITCHER - REMOVE -->
-		<script async type="text/javascript" src="demo_files/styleswitcher/styleswitcher.js"></script>
-	</body>
+<body>
+  <!-- This file lives in public/500.html -->
+  <div class="dialog">
+    <div>
+      <h1>We're sorry, but something went wrong.</h1>
+    </div>
+    <p>If you are the application owner check the logs for more information.</p>
+  </div>
+</body>
 </html>
