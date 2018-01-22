@@ -18,6 +18,6 @@
 
 # Ignore application configuration
 /config/application.yml
-/config/database.tml
+/config/database.yml
 
 /public/uploads/tmp
