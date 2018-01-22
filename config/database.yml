@@ -23,6 +23,7 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  # For details on connection pooling, see rails configuration guide
-  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  database: production
+  username: ubuntu
+  password: ENV['PG_PASSWORD']
   pool: 5

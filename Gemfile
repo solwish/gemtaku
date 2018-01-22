@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 # if its not, it can be error
 gem 'simple_form'
 # for db
-gem 'pg'
+gem 'pg', '~> 0.20'
 # s3
 gem 'fog'
 # real_time club chat

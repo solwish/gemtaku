@@ -4,7 +4,7 @@ class ClubsController < ApplicationController
   def update
     # user = User.find(current_user.id)
     # user.update(club_id: params[:id])
-    # render clubs_path
+    # redirect_to clubs_path
   end
 
   def index
