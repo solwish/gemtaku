@@ -2,9 +2,9 @@ class ClubsController < ApplicationController
   before_action :authenticate_user!
 
   def update
-    user = User.find(current_user.id)
-    user.update(club_id: params[:id])
-    redirect_to clubs_path
+    # user = User.find(current_user.id)
+    # user.update(club_id: params[:id])
+    # render clubs_path
   end
 
   def index
