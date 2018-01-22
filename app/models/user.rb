@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
 
   before_save {self.email = email.downcase}
   before_save {self.nickname = nickname.downcase}
+  before_save {self.club_id = 1}
   VALID_EMAIL_REGEX = /\A([\w+\-]\.?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
   validates :name, presence: true, length: {maximum: 20}, format: {without: /\s/, :message => "can't use space"}
   validates :nickname, presence: true, length: {maximum: 20}, uniqueness: true, format: {without: /\s/, :message => "can't use space"}
@@ -39,6 +40,7 @@ class User < ActiveRecord::Base
       user.name = auth.info.name.delete(' ')   # assuming the user model has a name
       user.nickname = Faker::Name.unique.name.delete(' ').downcase   #위 유효성검사 통과를 위해 faker 변수 사용
       user.gender = auth.extra.raw_info.gender
+      user.club_id = 1
       # user.image = auth.info.image # assuming the user model has an image
       # If you are using confirmable and the provider(s) you use validate emails,
       # uncomment the line below to skip the confirmation emails.

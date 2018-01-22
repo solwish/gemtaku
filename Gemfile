@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
 
+gem 'simple_form'
 # for db
-gem 'pg'
+gem 'pg', '~> 0.20'
 # s3
 gem 'fog'
 # real_time club chat
