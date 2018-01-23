@@ -1,9 +1,11 @@
 
 	<!-- SLIDER -->
 	<section id="slider">
-
-		<img src="<%= @shop_attachments.first.avatar %>"  class="imgLoaded" data-alignment="" data-portrait="" width="1200" height="800" style="visibility: visible;">
-
+		<% if @shop_attachment.first.nil? %>
+			<img src="http://placehold.it/1200x800"  class="imgLoaded" data-alignment="" data-portrait="" width="1200" height="800" style="visibility: visible;">
+		<% else %>
+			<img src="<%= @shop_attachment.first.avatar %>"  class="imgLoaded" data-alignment="" data-portrait="" width="1200" height="800" style="visibility: visible;">
+		<% end %>
 		<!-- ribbon -->
 		<!-- <div class="property-ribbon">
 			<span class="bg-red text-white">SALE</span>
@@ -129,7 +131,7 @@
 
 					<div class="row lightbox" data-plugin-options='{"delegate": "a", "gallery": {"enabled": true}}'>
 
-						<% @shop_attachments.each do |p| %>
+						<% @shop_attachment.each do |p| %>
 							<div class="col-xs-6 col-md-6 col-lg-6 mb-30">
 								<a href="<%= p.avatar %>" class="image-hover-plus image-hover-overlay">
 									<i class="icon-hover-plus"></i>

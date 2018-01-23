@@ -17,7 +17,7 @@ class ShopsController < ApplicationController
   # GET /shops/1
   # GET /shops/1.json
   def show
-    @shop_attachments = @shop.shop_attachments.all
+    @shop_attachment = @shop.shop_attachments.all
   end
 
   # GET /shops/new
@@ -37,8 +37,10 @@ class ShopsController < ApplicationController
 
     respond_to do |format|
       if @shop.save
-        params[:shop_attachments]['avatar'].each do |a|
-          @shop_attachment = @shop.shop_attachments.create!(avatar: a)
+        unless params[:shop_attachments].nil?
+          params[:shop_attachments]['avatar'].each do |a|
+            @shop_attachment = @shop.shop_attachments.create!(avatar: a)
+          end
         end
         format.html { redirect_to @shop, notice: 'Shop was successfully created.' }
         format.json { render :show, status: :created, location: @shop }
@@ -54,9 +56,11 @@ class ShopsController < ApplicationController
   def update
     respond_to do |format|
       if @shop.update(shop_params)
-        @shop.shop_attachments.each(&:destroy) if @shop.shop_attachments.present?
-        params[:shop_attachments]['avatar'].each do |a|
-          @shop_attachment = @shop.shop_attachments.create!(avatar: a)
+        unless params[:shop_attachments].nil?
+          @shop.shop_attachments.each(&:destroy) if @shop.shop_attachments.present?
+          params[:shop_attachments]['avatar'].each do |a|
+            @shop_attachment = @shop.shop_attachments.create!(avatar: a)
+          end
         end
         format.html { redirect_to @shop, notice: 'Shop was successfully updated.' }
         format.json { render :show, status: :ok, location: @shop }

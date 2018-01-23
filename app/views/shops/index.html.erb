@@ -93,7 +93,11 @@
 
           <!-- IMAGE -->
           <a class="property-image" href="/shops/<%= shop.id %>">
-            <img class="img-fluid" src="<%= shop.shop_attachments.first.avatar.thumb %>" alt="해당 카페는 이미지가 없습니다.">
+            <% if shop.shop_attachments.first.nil? %>
+              <img class="img-fluid" src="http://placehold.it/200x100">
+            <% else %>
+              <img class="img-fluid" src="<%= shop.shop_attachments.first.avatar.thumb %>" alt="해당 카페는 이미지가 없습니다.">
+            <% end %>
           </a>
 
 
