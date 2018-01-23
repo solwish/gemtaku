@@ -4,23 +4,26 @@ class ShopsController < ApplicationController
   load_and_authorize_resource
 
   def region
-    @shops = Shop.where(region: params[:region]).page(params[:page]).per(5)
+    @shop = Shop.where(region: params[:region])
+    @shop = Shop.all if params[:region] == "전체"
     render 'index'
   end
   # GET /shops
   # GET /shops.json
   def index
-    @shops = Shop.order("created_at DESC").page(params[:page]).per(5)
+    @shop = Shop.all
   end
 
   # GET /shops/1
   # GET /shops/1.json
   def show
+    @shop_attachments = @shop.shop_attachments.all
   end
 
   # GET /shops/new
   def new
     @shop = Shop.new
+    @shop_attachment = @shop.shop_attachments.build
   end
 
   # GET /shops/1/edit
@@ -34,6 +37,9 @@ class ShopsController < ApplicationController
 
     respond_to do |format|
       if @shop.save
+        params[:shop_attachments]['avatar'].each do |a|
+          @shop_attachment = @shop.shop_attachments.create!(avatar: a)
+        end
         format.html { redirect_to @shop, notice: 'Shop was successfully created.' }
         format.json { render :show, status: :created, location: @shop }
       else
@@ -48,6 +54,10 @@ class ShopsController < ApplicationController
   def update
     respond_to do |format|
       if @shop.update(shop_params)
+        @shop.shop_attachments.each(&:destroy) if @shop.shop_attachments.present?
+        params[:shop_attachments]['avatar'].each do |a|
+          @shop_attachment = @shop.shop_attachments.create!(avatar: a)
+        end
         format.html { redirect_to @shop, notice: 'Shop was successfully updated.' }
         format.json { render :show, status: :ok, location: @shop }
       else
@@ -75,6 +85,6 @@ class ShopsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def shop_params
-      params.require(:shop).permit(:title, :content, :region, :avatar)
+      params.require(:shop).permit(:title, :content, :region, shop_attachments_attributes: [:id, :shop_id, :avatar])
     end
 end

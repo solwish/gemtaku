@@ -34,6 +34,7 @@
 
                     <select class="form-control select2" name="region">
                       <option value="" disabled="disabled">Please, select a city.</option>
+                      <option value="전체">전체</option>
                       <option value="홍대">홍대</option>
                       <option value="신촌">신촌</option>
                       <option value="강남">강남</option>
@@ -74,7 +75,7 @@
 
       </div>
 
-      <% @shops.each do |shop| %>
+      <% @shop.each do |shop| %>
 
       <div class="col-xs-12 col-sm-6">
 
@@ -92,7 +93,7 @@
 
           <!-- IMAGE -->
           <a class="property-image" href="/shops/<%= shop.id %>">
-            <img class="img-fluid" src="<%= shop.avatar.thumb %>" alt="해당 카페는 이미지가 없습니다.">
+            <img class="img-fluid" src="<%= shop.shop_attachments.first.avatar.thumb %>" alt="해당 카페는 이미지가 없습니다.">
           </a>
 
 
@@ -146,5 +147,3 @@
 <br>
 
 <%= link_to 'New Shop', new_shop_path, class: "btn btn-black" if can? :create, Shop %>
-
-<%= paginate @shops %>

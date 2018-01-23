@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180117161807) do
+ActiveRecord::Schema.define(version: 20180123054358) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -91,11 +91,17 @@ ActiveRecord::Schema.define(version: 20180117161807) do
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], name: "index_roles_on_name"
 
+  create_table "shop_attachments", force: :cascade do |t|
+    t.integer  "shop_id"
+    t.string   "avatar"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "shops", force: :cascade do |t|
     t.string   "title",      default: "", null: false
     t.text     "content",    default: "", null: false
     t.string   "region",     default: "", null: false
-    t.string   "avatar",     default: ""
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end

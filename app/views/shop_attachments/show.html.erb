@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Shop:</strong>
+  <%= @shop_attachment.shop_id %>
+</p>
+
+<p>
+  <strong>Avatar:</strong>
+  <%= @shop_attachment.avatar %>
+</p>
+
+<%= link_to 'Edit', edit_shop_attachment_path(@shop_attachment) %> |
+<%= link_to 'Back', shop_attachments_path %>

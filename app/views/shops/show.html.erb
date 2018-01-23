@@ -1,13 +1,14 @@
 
 	<!-- SLIDER -->
 	<section id="slider">
-		<img src="<%= @shop.avatar %>"  class="imgLoaded" data-alignment="" data-portrait="" width="1200" height="800" style="visibility: visible;">
+
+		<img src="<%= @shop_attachments.first.avatar %>"  class="imgLoaded" data-alignment="" data-portrait="" width="1200" height="800" style="visibility: visible;">
 
 		<!-- ribbon -->
-		<div class="property-ribbon">
+		<!-- <div class="property-ribbon">
 			<span class="bg-red text-white">SALE</span>
 			<span class="bg-blue text-white">-10% OFF</span>
-		</div>
+		</div> -->
 		<!-- /ribbon -->
 
 	</section>
@@ -128,19 +129,21 @@
 
 					<div class="row lightbox" data-plugin-options='{"delegate": "a", "gallery": {"enabled": true}}'>
 
-						<div class="col-xs-6 col-md-6 col-lg-6 mb-30">
-							<a href="<%= @shop.avatar.thumb %>" class="image-hover-plus image-hover-overlay">
-								<i class="icon-hover-plus"></i>
-								<img class="img-fluid" src=" <%= @shop.avatar.thumb %> " alt="">
-							</a>
-						</div>
+						<% @shop_attachments.each do |p| %>
+							<div class="col-xs-6 col-md-6 col-lg-6 mb-30">
+								<a href="<%= p.avatar %>" class="image-hover-plus image-hover-overlay">
+									<i class="icon-hover-plus"></i>
+									<img class="img-fluid" src=" <%= p.avatar.thumb %> " alt="">
+								</a>
+							</div>
+						<% end %>
 
-						<div class="col-xs-6 col-md-6 col-lg-6 mb-30">
-							<a href="<%= @shop.avatar.thumb %>" class="image-hover-plus image-hover-overlay">
+						<!-- <div class="col-xs-6 col-md-6 col-lg-6 mb-30">
+							<a href="<%#= @shop.avatar.thumb %>" class="image-hover-plus image-hover-overlay">
 								<i class="icon-hover-plus"></i>
-								<img class="img-fluid" src="<%= @shop.avatar.thumb %>" alt="">
+								<img class="img-fluid" src="<%#= @shop.avatar.thumb %>" alt="">
 							</a>
-						</div>
+						</div> -->
 
 						<!-- <div class="col-xs-6 col-md-6 col-lg-6 mb-30">
 							<a href="demo_files/images/packs/realestate/gallery-item/5-min.jpg" class="image-hover-plus image-hover-overlay">

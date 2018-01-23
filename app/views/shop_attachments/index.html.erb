@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Shop Attachments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Shop</th>
+      <th>Avatar</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @shop_attachments.each do |shop_attachment| %>
+      <tr>
+        <td><%= shop_attachment.shop_id %></td>
+        <td><%= shop_attachment.avatar %></td>
+        <td><%= link_to 'Show', shop_attachment %></td>
+        <td><%= link_to 'Edit', edit_shop_attachment_path(shop_attachment) %></td>
+        <td><%= link_to 'Destroy', shop_attachment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Shop attachment', new_shop_attachment_path %>

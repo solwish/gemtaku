@@ -2,7 +2,9 @@ class Shop < ActiveRecord::Base
   resourcify
 
   paginates_per 5
-  mount_uploader :avatar, AvatarUploader
+  has_many :shop_attachments
+  accepts_nested_attributes_for :shop_attachments, allow_destroy: true
+
 
   before_save {self.title = title.strip}
   validates :title, presence: true, length: {minimum: 2, maximum: 200}

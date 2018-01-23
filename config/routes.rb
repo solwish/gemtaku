@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :shop_attachments
   get 'clubs/index', as: :clubs
   post 'clubs/talk' => 'clubs#talk'
   get 'clubs/update/:id' => 'clubs#update'
