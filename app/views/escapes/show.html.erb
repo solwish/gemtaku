@@ -10,8 +10,8 @@
 </p>
 
 <p>
-  <strong>Contents:</strong>
-  <%= @escape.contents %>
+  <strong>content:</strong>
+  <%= @escape.content %>
 </p>
 
     <%= link_to 'Back', escapes_path %>
@@ -49,7 +49,7 @@
     <tbody class="comment-list">
       <% @escape.comments.reverse.each do |comment| %>
       <tr id="comment-<%= comment.id %>">
-        <td class="comment" data-id="<%= comment.id %>"><%= comment.contents%></td>
+        <td class="comment" data-id="<%= comment.id %>"><%= comment.content%></td>
         <td><%= time_ago_in_words(comment.created_at) %></td>
         <td><%= comment.user.nickname %></td>
         <td><button class="btn delete-comment" data-id="<%= comment.id %>">삭제</button></td>
@@ -76,7 +76,7 @@
               url: '/escapes/<%= @escape.id %>/comments',
               method: 'POST',
               data: {
-                contents: data
+                content: data
               },
               headers: {
                 // 'X-Transaction': 'POST Example',
@@ -118,13 +118,13 @@
         });
         $('.comment-list').on('click', '.update-comment', function(){
           if('<%= current_user %>'){
-            var updatedcontents = $('.comment-form').val();
+            var updatedcontent = $('.comment-form').val();
             var id = $('.comment-id').val();
             $.ajax({
               url: '/escapes/<%= @escape.id %>/comments/' + id,
               method : 'PATCH',
               data: {
-                contents: updatedcontents
+                content: updatedcontent
               },
               headers: {
                 // 'X-Transaction': 'POST Example',

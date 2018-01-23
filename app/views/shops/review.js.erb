@@ -1,0 +1,28 @@
+<% if @flag %>
+  $('.comment-list').prepend(`
+    <div class="row">
+      <div class="col-md-10 col-sm-10">
+        <div class="card card-default">
+          <div class="card-block">
+            <header class="text-left">
+              <span class="comment-user"><i class="fa fa-user"></i> <%= @review.user.nickname %></span>
+            </header>
+            <header class="text-right">
+              <span class="comment-date"><i class="fa fa-clock-o"></i> <%= time_ago_in_words(@review.created_at) %></span>
+            </header>
+            <strong>별점 : </strong><span class="rating rating-<%= @review.rating %> fs-15 text-warning"><!-- rating-1 ... rating-5 --></span>
+            <div class="comment-post">
+              <p>
+                <%= @review.comment %>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    `);
+    $('#review').val('');
+    alert("리뷰가 성공적으로 등록되었습니다.")
+<% else %>
+  alert("이미 작성하신 리뷰가 있습니다.")
+<% end %>

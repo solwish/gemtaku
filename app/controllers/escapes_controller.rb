@@ -62,6 +62,7 @@ class EscapesController < ApplicationController
   # DELETE /escapes/1
   # DELETE /escapes/1.json
   def destroy
+    # @escape.comments.each(&:destroy)
     @escape.destroy
     respond_to do |format|
       format.html { redirect_to escapes_url, notice: 'Escape was successfully destroyed.' }
@@ -82,7 +83,7 @@ class EscapesController < ApplicationController
   end
 
   def create_comment
-    @comment = Comment.new(user_id: current_user.id, escape_id: params[:escape_id], contents: params[:contents])
+    @comment = Comment.new(user_id: current_user.id, escape_id: params[:escape_id], content: params[:content])
     @flag = false
     @flag = true if @comment.save
   end
@@ -97,7 +98,7 @@ class EscapesController < ApplicationController
   def update_comment
     @comment = Comment.find(params[:comment_id])
     @flag = false
-    @flag = true if (@comment.user_id == current_user.id) && @comment.update(contents: params[:contents])
+    @flag = true if (@comment.user_id == current_user.id) && @comment.update(content: params[:content])
   end
 
   private
@@ -109,6 +110,6 @@ class EscapesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def escape_params
-      params.require(:escape).permit(:title, :contents)
+      params.require(:escape).permit(:title, :content)
     end
 end

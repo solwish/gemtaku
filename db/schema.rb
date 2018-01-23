@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180123054358) do
+ActiveRecord::Schema.define(version: 20180123133957) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 20180123054358) do
   end
 
   create_table "comments", force: :cascade do |t|
-    t.text     "contents",   default: "", null: false
+    t.text     "content",    default: "", null: false
     t.integer  "user_id"
     t.integer  "escape_id"
     t.datetime "created_at",              null: false
@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 20180123054358) do
   create_table "escapes", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "title",      default: "", null: false
-    t.text     "contents",   default: "", null: false
+    t.text     "content",    default: "", null: false
     t.string   "region",     default: "", null: false
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
@@ -98,10 +98,23 @@ ActiveRecord::Schema.define(version: 20180123054358) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "shop_reviews", force: :cascade do |t|
+    t.integer  "rating"
+    t.string   "comment"
+    t.integer  "user_id"
+    t.integer  "shop_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "shop_reviews", ["shop_id"], name: "index_shop_reviews_on_shop_id"
+  add_index "shop_reviews", ["user_id"], name: "index_shop_reviews_on_user_id"
+
   create_table "shops", force: :cascade do |t|
     t.string   "title",      default: "", null: false
     t.text     "content",    default: "", null: false
     t.string   "region",     default: "", null: false
+    t.string   "address",    default: "", null: false
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end

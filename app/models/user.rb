@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   has_many :joins
   has_many :talks
   belongs_to :club
+  has_many :shop_reviews
 
   # 폰 유효성검사
   # validates :phone,:presence => true,

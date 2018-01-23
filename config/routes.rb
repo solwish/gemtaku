@@ -10,7 +10,11 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
-  resources :shops
+  resources :shops do
+    member do
+      post 'review'
+    end
+  end
 
   resources :escapes do
     # resources :comments

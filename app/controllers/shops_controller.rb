@@ -3,6 +3,21 @@ class ShopsController < ApplicationController
   before_action :set_shop, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource
 
+  def review
+    if ShopReview.where(shop_id: params[:id], user_id: current_user.id).first.nil?
+      @review = ShopReview.new(
+        rating: params[:rating],
+        comment: params[:comment],
+        user_id: current_user.id,
+        shop_id: params[:id]
+      )
+      @flag = true if @review.save
+    else
+      @flag = false
+    end
+    # redirect_to :back
+  end
+
   def region
     @shop = Shop.where(region: params[:region])
     @shop = Shop.all if params[:region] == "전체"
@@ -89,6 +104,6 @@ class ShopsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def shop_params
-      params.require(:shop).permit(:title, :content, :region, shop_attachments_attributes: [:id, :shop_id, :avatar])
+      params.require(:shop).permit(:title, :content, :region, :address, shop_attachments_attributes: [:id, :shop_id, :avatar])
     end
 end

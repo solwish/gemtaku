@@ -27,19 +27,19 @@
 				<div class="col-md-6">
 
 					<span class="restate-item restate-item-price text-center">
-						14,000 원<i class="text-muted restate-monthly fs-12"> /1인</i>
+						<!-- 14,000 원<i class="text-muted restate-monthly fs-12"> /1인</i> -->
 						<!-- <a href="#mortgage-calculator" data-toggle="collapse" class="fs-11">MORTGAGE CALCULATOR</a> -->
 						<!--<span class="text-muted fs-11">MONTHLY PRICE</span>-->
 					</span>
 
 					<span class="restate-item text-center">
-						5
-						<span class="text-muted fs-11">ROOMS</span>
+						<!-- 5
+						<span class="text-muted fs-11">ROOMS</span> -->
 					</span>
 
 					<span class="restate-item text-center">
-						8
-						<span class="text-muted fs-11">Episode</span>
+						<!-- 8
+						<span class="text-muted fs-11">Episode</span> -->
 					</span>
 
 				</div>
@@ -53,7 +53,7 @@
 							data-lng  = google map longitude
 							* used by: assets/js/view/pack_realestate.js
 					-->
-					<a target="_blank" href="https://www.google.com/maps/search/<%= @shop.title %>" class="btn btn-default btn-sm m-0">
+					<a target="_blank" href='https://www.google.com/maps/search/<%= "#{@shop.region} #{@shop.title}" %>' class="btn btn-default btn-sm m-0">
 						<i class="fa fa-map-o"></i>
 						FULLSCREEN MAP
 					</a>
@@ -72,27 +72,30 @@
 		<div class="container">
 
 			<h2 class="fs-20 mb-20 fw-800">
-				<span class="text-muted fw-300" title="property unique id">Room001</span> <%= @shop.title %>
-				<span class="rating rating-4 fs-15 text-warning"><!-- rating-1 ... rating-5 --></span>
+				<span class="text-muted fw-300" title="property unique id">Room Escafe Cafe <%= @shop.id %></span> <%= @shop.title %>
+				<% if @shop.avg == 0 %>
+					<span class="rating fs-15 text-warning">평가없음</span>
+				<% else %>
+					<span class="rating rating-<%= @shop.avg %> fs-15 text-warning"><!-- rating-1 ... rating-5 --></span>
+				<% end %>
 			</h2>
 
 			<div class="row">
 
 				<div class="col-sm-4">
 
-					<div class="text-black"><span class="text-muted">Location:</span>  <%= @shop.region %> </div>
-					<div class="text-black"><span class="text-muted">Price:</span>  40,000 <span class="text-muted fs-11">/ ROOM</span></div>
+					<div class="text-black"><span class="text-muted">Location:</span>  <%= @shop.address %> </div>
+					<!-- <div class="text-black"><span class="text-muted">Price:</span>  40,000 <span class="text-muted fs-11">/ ROOM</span></div> -->
 					<!-- <div class="text-black"><span class="text-muted">Minimum Down Payment:</span>  15%</div> -->
 
 				</div>
 
-				<div class="col-sm-4">
+				<!-- <div class="col-sm-4">
 
 					<div class="text-black"><span class="text-muted">Type:</span>  Crime Scene</div>
 					<div class="text-black"><span class="text-muted">Business Hours:</span>  9:00am - 10:00pm</div>
-					<!-- <div class="text-black"><span class="text-muted">Pets:</span>  Allowed</div> -->
 
-				</div>
+				</div> -->
 
 				<!-- <div class="col-sm-4">
 
@@ -174,7 +177,7 @@
 									data-lng  = google map longitude
 									* used by: assets/js/view/pack_realestate.js
 							-->
-							<a target="_blank" href="https://www.google.com/maps/search/<%= @shop.title %>" class="btn btn-default btn-block  m-0">
+							<a target="_blank" href='https://www.google.com/maps/search/<%= "#{@shop.region} #{@shop.title}" %>' class="btn btn-default btn-block  m-0">
 								<i class="fa fa-map-o"></i>
 								MAP
 							</a>
@@ -202,7 +205,84 @@
 	</section>
 	<!-- /PROPERTY DESCRIPTION -->
 
+	<!-- Form -->
+	<%= form_tag("/shops/#{@shop.id}/review", method: :post) do %>
+	  <div class="row">
+	    <div class="col-md-8">
+        <label>평점 : <%= select_tag :rating, "<option>5</option><option>4</option><option>3</option><option>2</option><option>1</option>".html_safe %> <br>
+				</label>
+				<label>리뷰:</label>
+				<%= text_field_tag :comment, nil, class: "form-control" %>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<button id="shopreview" class="btn btn-3d btn-lg btn-reveal btn-black">
+					<i class="fa fa-check"></i>
+					<span>SUBMIT REVIEW</span>
+				</button>
+			</div>
+		</div>
+	<% end %>
+  <!-- /Form -->
 
+	<!-- Comment -->
+	<div class="comment-list">
+    <% @shop.shop_reviews.reverse.each do |review| %>
+			<div class="row">
+				<div class="col-md-10 col-sm-10">
+					<div class="card card-default">
+						<div class="card-block">
+							<header class="text-left">
+								<span class="comment-user"><i class="fa fa-user"></i> <%= review.user.nickname %></span>
+							</header>
+							<header class="text-right">
+								<span class="comment-date"><i class="fa fa-clock-o"></i> <%= time_ago_in_words(review.created_at) %></span>
+							</header>
+							<strong>별점 : </strong><span class="rating rating-<%= review.rating %> fs-15 text-warning"><!-- rating-1 ... rating-5 --></span>
+							<div class="comment-post">
+								<br>
+								<p>
+									<%= review.comment %>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+    <% end %>
+	</div>
 
-<%= link_to 'Edit', edit_shop_path(@shop), class: "btn btn-default btn-block  m-0" if can? :edit, @shop%>
-<%= link_to 'Back', shops_path, class: "btn btn-default btn-block  m-0" %>
+<header class="text-center">
+	<%= link_to 'Edit', edit_shop_path(@shop), class: "btn btn-default btn-3d btn-lg btn-reveal" if can? :edit, @shop%>
+	<%= link_to 'Back', shops_path, class: "btn btn-default btn-3d btn-lg btn-reveal" %>
+</header>
+
+<% content_for :script do %>
+	<script>
+		$(function(){
+			$('#shopreview').on('click', function(e) {
+				e.preventDefault();
+				var comment = $('#comment').val();
+				var rating = $('#rating').val();
+				if('<%= current_user %>'){
+					if (!(comment.trim().length < 1)){
+						$.ajax({
+							url: '/shops/<%= @shop.id %>/review',
+							method: "POST",
+							data: {
+								comment: comment,
+								rating: rating
+							},
+							headers: {
+								'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+							}
+						});
+					}else
+						alert("2글자 이상 작성해야합니다.");
+				}else
+					alert("로그인해야 작성 가능합니다.");
+			})
+		})
+	</script>
+<% end %>

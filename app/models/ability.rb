@@ -10,6 +10,7 @@ class Ability
     else
       can :read, :all
       can :region, Shop
+      can :review, [Shop, ShopReview]
 
       can :create, Escape
       can [:update, :destroy], user.escapes

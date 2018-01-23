@@ -4,6 +4,7 @@ class CreateShops < ActiveRecord::Migration
       t.string :title,              null: false, default: ""
       t.text :content,              null: false, default: ""
       t.string :region,             null: false, default: ""
+      t.string :address,            null: false, default: ""
 
       t.timestamps null: false
     end

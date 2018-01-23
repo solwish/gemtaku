@@ -8,6 +8,6 @@ class Comment < ActiveRecord::Base
     self.user.id == user.id
   end
 
-  before_save {self.contents = contents.strip}
-  validates :contents, presence: true, length: {minimum: 1, maximum: 300}
+  before_save {self.content = content.strip}
+  validates :content, presence: true, length: {minimum: 1, maximum: 300}
 end
