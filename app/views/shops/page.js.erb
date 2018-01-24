@@ -1,0 +1,45 @@
+if(<%= @shop.first.nil? %>)
+  alert("마지막 페이지 입니다.");
+else
+$('.property-item-list').append(`
+  <% @shop.each do |shop| %>
+    <div class="col-xs-12 col-sm-6">
+      <div class="property-item property-item-box">
+        <!-- IMAGE -->
+        <a class="property-image" href="/shops/<%= shop.id %>">
+          <% if shop.shop_attachments.first.nil? %>
+            <img class="img-fluid" src="http://placehold.it/200x100">
+          <% else %>
+            <img class="img-fluid" src="<%= shop.shop_attachments.first.avatar.thumb %>" alt="해당 카페는 이미지가 없습니다.">
+          <% end %>
+        </a>
+
+        <!-- PRICE and STREET LOCATION -->
+        <h4 class="property-item-price">
+
+          <small class="float-right text-danger">
+            <%= shop.region %>
+          </small>
+        </h4>
+
+        <!-- DETAILED LOCATION -->
+        <strong class="poperty-item-location fs-16 text-black">
+          <%= shop.title %>
+        </strong>
+
+        <!-- FEATURES -->
+        <ul class="property-item-features list-inline mb-0">
+            <li>#방탈출</li>
+
+            <li style="list-style: none">|</li>
+
+            <li>#테마</li>
+
+            <li style="list-style: none">|</li>
+
+            <li>#지역</li>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+`)

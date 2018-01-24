@@ -12,8 +12,8 @@
     </tr>
   </thead>
 
-  <tbody>
-    <% @escapes.reverse.each do |escape| %>
+  <tbody id="escape-list">
+    <% @escapes.each do |escape| %>
       <tr>
         <td><br><%= escape.id %></td>
         <td><br><%= link_to escape.title, escape %></td>
@@ -30,4 +30,23 @@
 
 <% content_for :script do %>
   <%#= paginate @escapes %>
+<% end %>
+
+<% content_for :script do %>
+  <script>
+    $(document).ready(function() {
+      var page_count = 2;
+      setInterval(function() {
+        if($(window).scrollTop() >= $(document).height() - $(window).height() - 1) {
+          $.ajax({
+            url: '/escapes/page',
+            method: 'GET',
+            data: {
+              page: page_count++
+            }
+          })
+        }
+      }, 3000);
+    })
+  </script>
 <% end %>

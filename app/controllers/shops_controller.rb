@@ -1,7 +1,15 @@
 class ShopsController < ApplicationController
-  # before_action :check_admin_for_shop, except: [:index, :show]
   before_action :set_shop, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show, :page, :region]
   load_and_authorize_resource
+
+  def page
+    if !(params[:region] == "") && !(params[:region] == "전체")
+      @shop = Shop.where(region: params[:region]).order("created_at DESC").page(params[:page])
+    else
+      @shop = Shop.order("created_at DESC").page(params[:page])
+    end
+  end
 
   def review
     if ShopReview.where(shop_id: params[:id], user_id: current_user.id).first.nil?
@@ -19,14 +27,15 @@ class ShopsController < ApplicationController
   end
 
   def region
-    @shop = Shop.where(region: params[:region])
-    @shop = Shop.all if params[:region] == "전체"
+    @region = params[:region]
+    @shop = Shop.where(region: params[:region]).order("created_at DESC").page(params[:page])
+    @shop = Shop.all.order("created_at DESC").page(params[:page]) if params[:region] == "전체"
     render 'index'
   end
   # GET /shops
   # GET /shops.json
   def index
-    @shop = Shop.all
+    @shop = Shop.order("created_at DESC").page(params[:page])
   end
 
   # GET /shops/1

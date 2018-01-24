@@ -1,104 +1,107 @@
-<section>
-  <div class="container">
-    <div class="row">
-      <!-- REGISTER -->
-      <div class="col-md-8 col-sm-7">
+<div class="row">
+  <!-- REGISTER -->
+  <div class="col-md-8 col-sm-7">
 
-        <!--
-        <div class="alert alert-mini alert-danger mb-30">
-          <strong>Oh snap!</strong> Password do not match!
-        </div>
-        -->
+    <!--
+    <div class="alert alert-mini alert-danger mb-30">
+      <strong>Oh snap!</strong> Password do not match!
+    </div>
+    -->
 
-        <div class="box-static box-transparent box-bordered p-30">
+    <div class="box-static box-transparent box-bordered p-30">
 
-          <div class="box-title mb-30">
-            <h2 class="fs-20">Sign up</h2>
-          </div>
+      <div class="box-title mb-10">
+        <h2 class="fs-20">Sign up</h2>
+      </div>
 
-          <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-            <%= f.error_notification %>
+      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= f.error_notification %>
 
-            <fieldset>
+        <fieldset>
 
-              <div class="row">
+          <div class="row">
 
-                <div class="col-md-12 col-sm-6">
-                  <%= f.input :email, required: true, autofocus: true %>
-                </div>
-
-                <!-- <div class="col-md-6 col-sm-6"> -->
-                  <!-- <label for="register:phone">Phone</label> -->
-                  <!-- <input class="form-control" type="text"> -->
-                <!-- </div> -->
-
-              </div>
-
-              <div class="row">
-
-                <div class="col-md-6 col-sm-6">
-                  <%= f.input :name, required: true %>
-                </div>
-
-                <div class="col-md-6 col-sm-6">
-                  <%= f.input :nickname, required: true %>
-                </div>
-
-              </div>
-
-              <div class="row">
-
-                <div class="col-md-6 col-sm-6">
-                  <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
-                </div>
-
-                <div class="col-md-6 col-sm-6">
-                  <%= f.input :password_confirmation, required: true %>
-                </div>
-
-              </div>
-              <%= select(:user, :gender, [['male', "male"], ['female', "female"], ['other', "other"]]) %>
-
-              <hr />
-              <!-- <label class="checkbox m-0 block"><input class="checked-agree" type="checkbox" name="checkbox"><i></i>I agree to the <a href="#" data-toggle="modal" data-target="#termsModal">Terms of Service</a></label>
-              <label class="checkbox m-0 block"><input type="checkbox" name="checkbox"><i></i>I want to receive news and  special offers</label> -->
-
-            </fieldset>
-            <p>가입 후 이메일 인증시 로그인 가능합니다.</p>
-
-            <div class="row">
-              <div class="col-md-12">
-                <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-check"></i> REGISTER</button>
-              </div>
+            <div class="col-md-12 col-sm-6">
+              <%= f.input :email, required: true, autofocus: true %>
             </div>
-          <% end %>
-        </div>
-      </div>
-      <!-- /REGISTER -->
 
-      <!-- LOGIN -->
-      <div class="col-md-4 col-sm-5">
+            <!-- <div class="col-md-6 col-sm-6"> -->
+              <!-- <label for="register:phone">Phone</label> -->
+              <!-- <input class="form-control" type="text"> -->
+            <!-- </div> -->
 
-        <div class="box-static box-transparent box-bordered p-30">
-          <div class="box-title mb-30">
-            <h2 class="fs-20">Sign up with Facebook</h2>
           </div>
-          <a class="btn btn-block btn-social btn-facebook mt-10" href="/users/auth/facebook">
-            <i class="fa fa-facebook"></i> Sign in with Facebook
-          </a>
 
-          <hr />
-        </div>
-        <hr /><hr /><hr />
-        <div class="box-static box-transparent box-bordered p-30">
-          <div class="text-center">
-            <div class="mb-20">&ndash; OR &ndash;</div>
-            <a href="/users/sign_in">Log in</a><br />
-            <a href="/users/confirmation/new">Didn&#39;t receive confirmation instructions?</a><br />
+          <div class="row">
+
+            <div class="col-md-6 col-sm-6">
+              <%= f.input :name, required: true %>
+            </div>
+
+            <div class="col-md-6 col-sm-6">
+              <%= f.input :nickname, required: true %>
+            </div>
+
+          </div>
+
+          <div class="row">
+
+            <div class="col-md-6 col-sm-6">
+              <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
+            </div>
+
+            <div class="col-md-6 col-sm-6">
+              <%= f.input :password_confirmation, required: true %>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col-md-2 col-sm-2">
+              <%= select(:user, :gender, [['male', "male"], ['female', "female"], ['other', "other"]]) %>
+            </div>
+            <div class="col-md-6 col-sm-6">
+              <p>가입 후 이메일 인증시 로그인 가능합니다.</p>
+            </div>
+          </div>
+
+          <!-- <hr /> -->
+          <!-- <label class="checkbox m-0 block"><input class="checked-agree" type="checkbox" name="checkbox"><i></i>I agree to the <a href="#" data-toggle="modal" data-target="#termsModal">Terms of Service</a></label>
+          <label class="checkbox m-0 block"><input type="checkbox" name="checkbox"><i></i>I want to receive news and  special offers</label> -->
+
+        </fieldset>
+
+
+        <div class="row">
+          <div class="col-md-12">
+            <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-check"></i> REGISTER</button>
           </div>
         </div>
-      </div>
-      <!-- /LOGIN -->
+      <% end %>
     </div>
   </div>
-</section>
+  <!-- /REGISTER -->
+
+  <!-- FACEBOOK -->
+  <div class="col-md-4 col-sm-5">
+
+    <div class="box-static box-transparent box-bordered p-30">
+      <div class="box-title mb-30">
+        <h2 class="fs-20">Sign up with Facebook</h2>
+      </div>
+      <a class="btn btn-block btn-social btn-facebook mt-10" href="/users/auth/facebook">
+        <i class="fa fa-facebook"></i> Sign in with Facebook
+      </a>
+
+      <hr />
+    </div>
+    <hr /><hr /><hr />
+    <div class="box-static box-transparent box-bordered p-30">
+      <div class="text-center">
+        <div class="mb-20">&ndash; OR &ndash;</div>
+        <a href="/users/sign_in">Log in</a><br />
+        <a href="/users/confirmation/new">Didn&#39;t receive confirmation instructions?</a><br />
+      </div>
+    </div>
+  </div>
+  <!-- /FACEBOOK -->
+</div>

@@ -1,13 +1,16 @@
 class EscapesController < ApplicationController
   before_action :set_escape, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show, :page]
   load_and_authorize_resource
+
+  def page
+    @escapes = Escape.order("created_at DESC").page(params[:page])
+  end
 
   # GET /escapes
   # GET /escapes.json
   def index
-    @escapes = Escape.all.reverse
-    @escapes = Kaminari.paginate_array(@escapes).page(params[:page]).per(20).reverse
+    @escapes = Escape.order("created_at DESC").page(params[:page])
   end
 
   # GET /escapes/1
@@ -106,7 +109,6 @@ class EscapesController < ApplicationController
     def set_escape
       @escape = Escape.find(params[:id])
     end
-
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def escape_params

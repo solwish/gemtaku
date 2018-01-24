@@ -11,8 +11,10 @@ class Ability
       can :read, :all
       can :region, Shop
       can :review, [Shop, ShopReview]
+      can :page, Shop
 
       can :create, Escape
+      can :page, Escape
       can [:update, :destroy], user.escapes
 
       can :create_comment, [Escape, Comment]

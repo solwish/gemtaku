@@ -3,17 +3,13 @@
 <section class="alternate">
   <div class="container">
 
-
     <header class="text-center mb-60">
       <h2 class="fs-25">Listing Shops</h2>
       <p class="fw-300">#홍대 #신촌 #강남 #건대</p>
     </header>
 
-
     <div class="row property-item-list">
-
       <div class="col-xs-12 col-sm-6">
-
         <div class="property-item property-item-box">
           <!-- LEFT COLUMN -->
           <div class="col-xs-12 order-lg-1 order-md-1 mb-0">
@@ -31,7 +27,7 @@
                 <div class="row">
 
                   <div class="col-md-12">
-
+                    <input type="hidden" id="region" value="<%= @region %>">
                     <select class="form-control select2" name="region">
                       <option value="" disabled="disabled">Please, select a city.</option>
                       <option value="전체">전체</option>
@@ -70,77 +66,55 @@
             </div>
 
           </div>
-
         </div>
-
       </div>
-
       <% @shop.each do |shop| %>
+        <div class="col-xs-12 col-sm-6">
+          <div class="property-item property-item-box">
+            <!-- IMAGE -->
+            <a class="property-image" href="/shops/<%= shop.id %>">
+              <% if shop.shop_attachments.first.nil? %>
+                <img class="img-fluid" src="http://placehold.it/200x100">
+              <% else %>
+                <img class="img-fluid" src="<%= shop.shop_attachments.first.avatar.thumb %>" alt="해당 카페는 이미지가 없습니다.">
+              <% end %>
+            </a>
+            <!-- PRICE and STREET LOCATION -->
+            <h4 class="property-item-price">
+              <!-- <strong class="text-primary">
+                $1,595,000
 
-      <div class="col-xs-12 col-sm-6">
+              </strong> -->
+              <small class="float-right text-danger">
+                <%= shop.region %>
+              </small>
+            </h4>
 
-        <!--
-          # PROPERTY ITEM
+            <!-- DETAILED LOCATION -->
+            <strong class="poperty-item-location fs-16 text-black">
+              <%= shop.title %>
+            </strong>
 
-            .property-item-box 			= boxed item (use it with bootstrap grid)
-            .b-0 					= clean, unbordered item (use it woth .property-item-box  only)
+            <!-- FEATURES -->
+            <ul class="property-item-features list-inline mb-0">
+                <li>#방탈출</li>
 
-            .property-featured-blue		= blue featured color
-            .property-featured-yellow	= yellow featured color
-            .property-featured-green	= green featured color
-        -->
-        <div class="property-item property-item-box">
+                <li style="list-style: none">|</li>
 
-          <!-- IMAGE -->
-          <a class="property-image" href="/shops/<%= shop.id %>">
-            <% if shop.shop_attachments.first.nil? %>
-              <img class="img-fluid" src="http://placehold.it/200x100">
-            <% else %>
-              <img class="img-fluid" src="<%= shop.shop_attachments.first.avatar.thumb %>" alt="해당 카페는 이미지가 없습니다.">
-            <% end %>
-          </a>
+                <li>#테마</li>
 
+                <li style="list-style: none">|</li>
 
-          <!-- PRICE and STREET LOCATION -->
-          <h4 class="property-item-price">
-            <!-- <strong class="text-primary">
-              $1,595,000
-            </strong> -->
-
-            <small class="float-right text-danger">
-              <%= shop.region %>
-            </small>
-          </h4>
-
-          <!-- DETAILED LOCATION -->
-          <strong class="poperty-item-location fs-16 text-black">
-            <%= shop.title %>
-          </strong>
-
-          <!-- FEATURES -->
-                    <ul class="property-item-features list-inline mb-0">
-                        <li>#크라임 씬</li>
-
-                        <li style="list-style: none">|</li>
-
-                        <li>#테마</li>
-
-                        <li style="list-style: none">|</li>
-
-                        <li>#연인</li>
-                    </ul>
-
+                <li>#지역</li>
+            </ul>
+          </div>
         </div>
-
-      </div>
-
       <% end %>
-
     </div>
 
     <div class="text-center mt-30">
 
-      <a href="#" class="btn btn-primary bg-black border-black">더보기</a>
+      <a href="#" class="btn btn-primary bg-black border-black more">더보기</a>
 
     </div>
 
@@ -151,3 +125,24 @@
 <br>
 
 <%= link_to 'New Shop', new_shop_path, class: "btn btn-black" if can? :create, Shop %>
+
+<% content_for :script do %>
+  <script>
+    $(document).ready(function() {
+      var page_count = 2;
+      var region = $('#region').val();
+      $('.more').on('click', function(e) {
+        e.preventDefault();
+        $.ajax({
+          url: '/shops/page',
+          method: 'GET',
+          data: {
+            page: page_count++,
+            region: region
+          }
+        })
+      })
+    })
+  </script>
+
+<% end %>
