@@ -1,39 +1,35 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Gemtaku</title>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
-  <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%= javascript_include_tag 'application' %>
-  <%= csrf_meta_tags %>
-  <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-112089578-2"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+  <head>
+    <title>Gemtaku</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+    <%= csrf_meta_tags %>
+    <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-112089578-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-    gtag('config', 'UA-112089578-2');
-  </script>
-</head>
-<body>
-	<div id="wrapper">
+      gtag('config', 'UA-112089578-2');
+    </script>
+  </head>
+  <body>
     <%= render 'shared/topbar' %>
     <%= render 'shared/nav' %>
 
     <div class="container">
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-
+      <p class="notice text-light bg-dark fs-20 text-center"><%= notice %></p>
+      <p class="alert text-warning fs-20 text-center"><%= alert %></p>
       <%= yield %>
     </div>
 
     <%= render 'shared/footer' %>
-
     <script type="text/javascript">var plugin_path = '/custom/assets/plugins/';</script>
     <%= yield :script %>
-
-</body>
+  </body>
 </html>
