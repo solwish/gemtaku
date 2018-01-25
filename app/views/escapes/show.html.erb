@@ -1,62 +1,111 @@
 
-<p>
-  <strong>User:</strong>
-  <%= @escape.user.nickname %>
-</p>
+<div class="row">
 
-<p>
-  <strong>Title:</strong>
-  <%= @escape.title %>
-</p>
+	<!-- LEFT -->
+	<div class="col-md-9 col-sm-9">
 
-<p>
-  <strong>content:</strong>
-  <%= @escape.content %>
-</p>
+		<h1 class="blog-post-title"> <%= @escape.title %> </h1>
+		<ul class="blog-post-info list-inline">
+			<li>
+				<a href="#">
+					<i class="fa fa-clock-o"></i>
+					<span class="font-lato"><%= " #{@escape.created_at.strftime('%b')} #{@escape.created_at.strftime('%d')}, #{@escape.created_at.strftime("%Y")}" %></span>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<i class="fa fa-comment-o"></i>
+					<span class="font-lato"><%= @escape.comments.count %> Comments</span>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<i class="fa fa-user"></i>
+					<span class="font-lato"><%= @escape.user.nickname %></span>
+				</a>
+			</li>
+		</ul>
 
-    <%= link_to 'Back', escapes_path %>
+		<!-- article content -->
+		<p><%= @escape.content %></p>
+		<!-- /article content -->
+		<% if @join.length > 0 %>
+	    <button type="button" class="join btn btn-3d btn-lg btn-reveal btn-black" >참여취소 <span id ="join-count"><%= @escape.joins.count %></span></button>
+	  <% else %>
+	    <button type="button" class="join btn btn-3d btn-lg btn-reveal btn-black" >참여하기 <span id ="join-count"><%= @escape.joins.count %></span></button>
+	  <% end %>
+		<div class="text-right">
+			<% if user_signed_in? && @escape.require_permission?(current_user) %>
+				<td><%= link_to "수정하기", edit_escape_path(@escape), class: "btn btn-3d btn-lg btn-reveal btn-secondary" %></td>
+				<td><%= link_to "삭제하기", @escape, data: {method: :delete, confirm: 'Are you sure?' }, class: "btn btn-3d btn-lg btn-reveal btn-secondary" %></td>
+			<% end %>
+		</div>
+		<div class="text-right">
+			<%= link_to 'Back', escapes_path, class: "btn btn-3d btn-lg btn-reveal btn-default" %>
+		</div>
+		<!-- COMMENTS -->
+		<div id="comments" class="comments">
 
-  <% if user_signed_in? && @escape.require_permission?(current_user) %>
-    <td><%= link_to "수정하기", edit_escape_path(@escape) %></td>
-    <td><%= link_to "삭제하기", @escape, data: {method: :delete, confirm: 'Are you sure?' } %></td>
-  <% end %>
+			<h4 class="page-header mb-60 fs-20">
+				<span><%= @escape.comments.count %></span> COMMENTS
+			</h4>
+
+			<!-- comment item -->
+			<table>
+				<thead>
+					<tr>
+						<th width="60%">내용</th>
+						<th width="15%"></th>
+						<th width="10%"></th>
+						<th width="15%"></th>
+					</tr>
+				</thead>
+				<tbody class="comment-list">
+					<% @escape.comments.each do |comment| %>
+					<tr id="comment-<%= comment.id %>">
+						<td class="comment" data-id="<%= comment.id %>"><%= comment.content%></td>
+						<td><small class="block"><%= " #{comment.created_at.strftime('%b')} #{comment.created_at.strftime('%d')}, #{comment.created_at.strftime("%Y")}" %> - <%= comment.created_at.strftime("%H:%M:%S") %></small></td>
+						<td class="media-heading bold text-center"><%= comment.user.nickname %></td>
+						<td><button class="btn delete-comment btn-default" data-id="<%= comment.id %>" data-confirm = "Are you sure?">삭제</button></td>
+					</tr>
+					<% end %>
+				</tbody>
+			</table>
+
+			<% if current_user %>
+			<!-- Form -->
+			<form id="comment-form">
+				<div class="row">
+					<div class="col-md-12">
+						<label>COMMENT</label>
+						<textarea required="required" maxlength="5000" rows="5" class="form-control" name="comment" id="comment-input"></textarea>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-12">
+
+						<button class="btn btn-3d btn-lg btn-reveal btn-black">
+							<i class="fa fa-check"></i>
+							<span>LEAVE A COMMENT</span>
+						</button>
+
+					</div>
+				</div>
+
+			</form>
+			<!-- /Form -->
+			<% else %>
+				<p>로그인해야 댓글을 달 수 있습니다.</p>
+			<% end %>
+
+		</div>
+		<!-- /COMMENTS -->
 
 
-  <!-- 참여하기,참여취소버튼만들어야함  -->
-  <% if @join.length > 0 %>
-    <button type="button" class="join" >참여취소(<span id ="join-count"><%= @escape.joins.count %></span>)</button>
-  <% else %>
-    <button type="button" class="join" >참여하기(<span id ="join-count"><%= @escape.joins.count %></span>)</button>
-  <% end %>
+	</div>
 
-<% if current_user %>
-  <form id="comment-form">
-    <input id="comment-input" type="text" placeholder="Comment">
-    <button type="submit">댓글등록</button>
-  </form>
-<% else %>
-  <p>로그인해야 댓글을 달 수 있습니다.</p>
-<% end %>
-  <table>
-    <thead>
-      <tr>
-        <th width="60%">내용</th>
-        <th width="15%"></th>
-        <th width="10%"></th>
-        <th width="15%"></th>
-      </tr>
-    </thead>
-    <tbody class="comment-list">
-      <% @escape.comments.reverse.each do |comment| %>
-      <tr id="comment-<%= comment.id %>">
-        <td class="comment" data-id="<%= comment.id %>"><%= comment.content%></td>
-        <td><%= time_ago_in_words(comment.created_at) %></td>
-        <td><%= comment.user.nickname %></td>
-        <td><button class="btn delete-comment" data-id="<%= comment.id %>">삭제</button></td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
+</div>
 
   <% content_for :script do %>
     <script>
