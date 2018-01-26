@@ -1,6 +1,10 @@
 class ClubsController < ApplicationController
   before_action :authenticate_user!
 
+  def page
+    @talks = Talk.order("created_at DESC").page(params[:page])
+  end
+
   def update
     # user = User.find(current_user.id)
     # user.update(club_id: params[:id])
@@ -9,7 +13,7 @@ class ClubsController < ApplicationController
 
   def index
     if current_user.club_id
-      @talks = Talk.where(club_id: current_user.club_id).reverse
+      @talks = Talk.where(club_id: current_user.club_id).order("created_at DESC").page(params[:page])
       @cnt = @talks.count
     else
       @talks = []

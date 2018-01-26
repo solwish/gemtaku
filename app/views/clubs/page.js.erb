@@ -1,0 +1,39 @@
+$('.comment-list').append(`
+  <% @talks.each do |talk| %>
+    <% if talk.user_id == current_user.id %>
+      <div class="col-md-8 col-sm-8">
+        <div class="card card-default arrow left card-header bg-light">
+          <div class="card-block">
+            <header class="text-left">
+              <div class="comment-user"><i class="fa fa-user"></i> Me<%#= talk.user.nickname %></div>
+              <span class="comment-date"><i class="fa fa-clock-o"></i> <%= time_ago_in_words(talk.created_at) %></span>
+            </header>
+            <div class="comment-post">
+              <p>
+                <%= talk.message %>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% else %>
+      <!-- Third Comment -->
+      <div class="col-md-8 col-sm-8">
+        <div class="card card-default arrow right card-header">
+          <div class="card-block">
+            <header class="text-right">
+              <div class="comment-user"><i class="fa fa-user"></i> <%= talk.user.nickname %></div>
+              <span class="comment-date"><i class="fa fa-clock-o"></i> <%= time_ago_in_words(talk.created_at) %></span>
+            </header>
+            <div class="comment-post text-right">
+              <p>
+                <i class="fa fa-comment"></i>
+                <strong><%= talk.message %></strong>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+`)

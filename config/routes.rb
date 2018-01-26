@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'clubs/index', as: :clubs
   post 'clubs/talk' => 'clubs#talk'
   get 'clubs/update/:id' => 'clubs#update'
+  get 'clubs/page' => 'clubs#page', as: :club_page
 
   get 'shops/city' => 'shops#region'
 
@@ -12,7 +13,6 @@ Rails.application.routes.draw do
 
   resources :shops do
     collection do
-      # get '/:region/page' => 'shops#page'
       get '/page' => 'shops#page', as: :shop_page
     end
 
@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   resources :escapes do
     collection do
       get 'page' => 'escapes#page', as: :escape_page
-      
+
       post '/:escape_id/comments' => 'escapes#create_comment', as: :create_comment_to
       delete '/:escape_id/comments/:comment_id' => 'escapes#delete_comment', as: :delete_comment_to
       patch '/:escape_id/comments/:comment_id' => 'escapes#update_comment', as: :update_comment_to
