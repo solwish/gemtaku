@@ -27,7 +27,7 @@
 		</ul>
 
 		<!-- article content -->
-		<p><%= @escape.content %></p>
+		<p><%= simple_format(@escape.content) %></p>
 		<!-- /article content -->
 		<% if @join.length > 0 %>
 	    <button type="button" class="join btn btn-3d btn-lg btn-reveal btn-black" >참여취소 <span id ="join-count"><%= @escape.joins.count %></span></button>

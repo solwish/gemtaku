@@ -82,7 +82,7 @@
 
 			<div class="row">
 
-				<div class="col-sm-4">
+				<div class="col-sm-8">
 
 					<div class="text-black"><span class="text-muted">Location:</span>  <%= @shop.address %> </div>
 					<!-- <div class="text-black"><span class="text-muted">Price:</span>  40,000 <span class="text-muted fs-11">/ ROOM</span></div> -->
@@ -126,7 +126,7 @@
 			<div class="row">
 
 				<div class="col-sm-8">
-					<p><%= @shop.content %></p>
+					<p><%= simple_format(@shop.content) %></p>
 				</div>
 
 				<div class="col-sm-4 m-0-xs">

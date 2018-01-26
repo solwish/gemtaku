@@ -56,8 +56,24 @@
 
           </div>
           <div class="row">
-            <div class="col-md-2 col-sm-2">
-              <%= select(:user, :gender, [['male', "male"], ['female', "female"], ['other', "other"]]) %>
+            <div class="col-md-6 col-sm-6">
+              <%#= select(:user, :gender, [['male', "male"], ['female', "female"], ['other', "other"]]) %>
+              <label>Gender</label>
+							<label class="radio">
+								<input type="radio" name="user[gender]" value="male" checked="checked">
+								<i></i> Male
+							</label>
+
+							<label class="radio">
+								<input type="radio" name="user[gender]" value="female">
+								<i></i> Female
+							</label>
+
+							<label class="radio">
+								<input type="radio" name="user[gender]" value="other">
+								<i></i> Other
+							</label>
+
             </div>
             <div class="col-md-6 col-sm-6">
               <p>가입 후 이메일 인증시 로그인 가능합니다.</p>

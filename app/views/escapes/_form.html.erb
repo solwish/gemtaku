@@ -11,15 +11,23 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
+  <div class="field row">
+    <div class="col-md-1 col-sm-1">
+      <%= f.label :title %><br>
+    </div>
+    <div class="col-md-6 col-sm-6">
+      <%= f.text_field :title, class: "form-control" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :content %><br>
-    <%= f.text_area :content ,cols: 50, rows: 10 %>
+  <div class="field row">
+    <div class="col-md-1 col-sm-1">
+      <%= f.label :content %><br>
+    </div>
+    <div class="col-md-6 col-sm-6">
+      <%= f.text_area :content, maxlength: "2500", rows: 5, class: "form-control", style: "height: 200px;" %>
+    </div>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="actions col-md-7 col-sm-7 text-right">
+    <%= f.submit class: "btn btn-primary" %>
   </div>
 <% end %>
