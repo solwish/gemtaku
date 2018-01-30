@@ -13,6 +13,14 @@
   </thead>
 
   <tbody id="escape-list">
+    <% @notices.each do |notice| %>
+      <tr>
+        <td><br><공지></td>
+        <td><br><%= link_to notice.title, notice %></td>
+        <td><br><%= notice.user.nickname %></td>
+        <td><br><%= notice.created_at.strftime('%a, %d %b %Y %H:%M:%S')%></td>
+      </tr>
+    <% end %>
     <% @escapes.each do |escape| %>
       <tr>
         <td><br><%= escape.id %></td>

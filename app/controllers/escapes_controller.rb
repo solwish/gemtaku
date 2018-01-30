@@ -10,6 +10,7 @@ class EscapesController < ApplicationController
   # GET /escapes
   # GET /escapes.json
   def index
+    @notices = Escape.where(is_notice: true)
     @escapes = Escape.order("created_at DESC").page(params[:page])
   end
 
