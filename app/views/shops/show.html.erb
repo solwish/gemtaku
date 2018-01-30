@@ -266,7 +266,7 @@
 				var comment = $('#comment').val();
 				var rating = $('#rating').val();
 				if('<%= current_user %>'){
-					if (!(comment.trim().length < 1)){
+					if (!(comment.trim().length < 1) && !(comment.length > 255)){
 						$.ajax({
 							url: '/shops/<%= @shop.id %>/review',
 							method: "POST",
@@ -279,7 +279,7 @@
 							}
 						});
 					}else
-						alert("2글자 이상 작성해야합니다.");
+						alert("2글자 이상 255자까지 작성 가능합니다.");
 				}else
 					alert("로그인해야 작성 가능합니다.");
 			})
