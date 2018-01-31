@@ -58,7 +58,7 @@ User.create(
     title: Faker::Superhero.name,
     content: Faker::Lorem.paragraphs.join.to_s,
     address: Faker::Lorem.paragraphs.join.to_s,
-    region: ["홍대", "신촌", "강남", "건대"].sample
+    region: ["홍대", "신촌", "강남", "건대", "대학로"].sample
   )
 end
 
