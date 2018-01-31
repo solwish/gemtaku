@@ -102,7 +102,7 @@ class EscapesController < ApplicationController
   def update_comment
     @comment = Comment.find(params[:comment_id])
     @flag = false
-    @flag = true if (@comment.user_id == current_user.id) && @comment.update(content: params[:content])
+    @flag = true if (@comment.user_id == current_user.id) && @comment.update(content: params[:content], is_edited: true)
   end
 
   private

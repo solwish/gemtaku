@@ -64,7 +64,11 @@
 					<% @escape.comments.each do |comment| %>
 					<tr id="comment-<%= comment.id %>">
 						<td class="comment" data-id="<%= comment.id %>"><%= comment.content%></td>
-						<td><small class="block"><%= " #{comment.created_at.strftime('%b')} #{comment.created_at.strftime('%d')}, #{comment.created_at.strftime("%Y")}" %> - <%= comment.created_at.strftime("%H:%M:%S") %></small></td>
+						<% if comment.is_edited %>
+							<td><small class="block"><%= " #{comment.updated_at.strftime('%b')} #{comment.updated_at.strftime('%d')}, #{comment.updated_at.strftime("%Y")}" %> - <%= comment.updated_at.strftime("%H:%M:%S") %><br>Edited</small></td>
+						<% else %>
+							<td><small class="block"><%= " #{comment.created_at.strftime('%b')} #{comment.created_at.strftime('%d')}, #{comment.created_at.strftime("%Y")}" %> - <%= comment.created_at.strftime("%H:%M:%S") %></small></td>
+						<% end %>
 						<td class="media-heading bold text-center"><%= comment.user.nickname %></td>
 						<td><button class="btn delete-comment btn-default" data-id="<%= comment.id %>" data-confirm = "Are you sure?">삭제</button></td>
 					</tr>
@@ -151,35 +155,44 @@
             alert("로그인을 해주세요.")
         });
         //댓글수정하기
+				var text
+				var nickname
         $('.comment-list').on('click','.comment', function(){
-          var nickname = $('.text-welcome')[0].children[0].innerHTML;
+          nickname = $('.text-welcome')[0].children[0].innerHTML;
           if(nickname == $(this).siblings()[1].innerHTML){
             if ($(this).parents('.comment-list').find('.comment-form').length >0){
-                alert('이미 수정중인 coment가 있습니다');
+                alert('이미 수정중인 comment가 있습니다');
                 return false;
             }
-            var text = $(this).text();
+            text = $(this).text();
             var id = $(this).data('id');
             $(this).siblings()[0].innerHTML = '<button class="btn btn-outline-success my-2 my-sm-0 update-comment" type="submit">수정완료</button>';
             $(this).replaceWith(`<td class="edit-comment"><input class="form-control comment-form" value="${text}"><input class="comment-id" type="hidden" value="${id}"></td>`);
-          }else
+					}else
             alert("본인만 수정 가능합니다.");
         });
         $('.comment-list').on('click', '.update-comment', function(){
           if('<%= current_user %>'){
             var updatedcontent = $('.comment-form').val();
             var id = $('.comment-id').val();
-            $.ajax({
-              url: '/escapes/<%= @escape.id %>/comments/' + id,
-              method : 'PATCH',
-              data: {
-                content: updatedcontent
-              },
-              headers: {
-                // 'X-Transaction': 'POST Example',
-                'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-              }
-            })
+						if(text != updatedcontent){
+	            $.ajax({
+	              url: '/escapes/<%= @escape.id %>/comments/' + id,
+	              method : 'PATCH',
+	              data: {
+	                content: updatedcontent
+	              },
+	              headers: {
+	                // 'X-Transaction': 'POST Example',
+	                'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+	              }
+	            })
+						}else {
+							alert("수정된 내용이 없습니다.")
+							console.log($(this).parent().parent());
+
+							$(this).parent().parent().replaceWith(`<tr><td class="comment" data-id="${id}">${text}</td><td></td><td class="media-heading bold text-center">${nickname}</td><td><button class="btn delete-comment btn-default" data-id="${id}" data-confirm = "Are you sure?">삭제</button></td></tr>`);
+						}
           }else
             alert("로그인을 해주세요.")
         });
