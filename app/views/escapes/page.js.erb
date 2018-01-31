@@ -2,7 +2,7 @@ $('#escape-list').append(`
   <% @escapes.each do |escape| %>
     <tr>
       <td><br><%= escape.id %></td>
-      <td><br><%= link_to escape.title, escape %></td>
+      <td><br><%= link_to escape.title, escape %>  [<%= escape.comments.count %>]</td>
       <td><br><%= escape.user.nickname %></td>
       <td><br><%= escape.created_at.strftime('%a, %d %b %Y %H:%M:%S')%></td>
     </tr>

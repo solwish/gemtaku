@@ -4,14 +4,14 @@ class EscapesController < ApplicationController
   load_and_authorize_resource
 
   def page
-    @escapes = Escape.order("created_at DESC").page(params[:page])
+    @escapes = Escape.order("created_at DESC").page(params[:page]).includes(:comments)
   end
 
   # GET /escapes
   # GET /escapes.json
   def index
     @notices = Escape.where(is_notice: true)
-    @escapes = Escape.order("created_at DESC").page(params[:page])
+    @escapes = Escape.order("created_at DESC").page(params[:page]).includes(:comments)
   end
 
   # GET /escapes/1
