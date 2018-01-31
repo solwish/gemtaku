@@ -7,7 +7,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string :name,               null: false, default: ""
       t.string :nickname,           null: false, default: ""
       t.string :gender,             null: false, default: ""
-      t.integer :club_id,           default: ""
+      t.integer :club_id,           default: 1
       # t.string :phone,              null: false, default: ""
       # t.boolean :is_admin?,         null: false, default: false
 

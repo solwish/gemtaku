@@ -6,9 +6,9 @@ class ClubsController < ApplicationController
   end
 
   def update
-    # user = User.find(current_user.id)
-    # user.update(club_id: params[:id])
-    # redirect_to clubs_path
+    user = User.find(current_user.id)
+    user.update(club_id: params[:id]) if Club.where(id: params[:id]).first
+    redirect_to clubs_path
   end
 
   def index

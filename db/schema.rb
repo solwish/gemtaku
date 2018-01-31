@@ -138,7 +138,7 @@ ActiveRecord::Schema.define(version: 20180131010402) do
     t.string   "name",                   default: "", null: false
     t.string   "nickname",               default: "", null: false
     t.string   "gender",                 default: "", null: false
-    t.integer  "club_id"
+    t.integer  "club_id",                default: 1
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"

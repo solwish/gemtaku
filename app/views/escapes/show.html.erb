@@ -189,8 +189,6 @@
 	            })
 						}else {
 							alert("수정된 내용이 없습니다.")
-							console.log($(this).parent().parent());
-
 							$(this).parent().parent().replaceWith(`<tr><td class="comment" data-id="${id}">${text}</td><td></td><td class="media-heading bold text-center">${nickname}</td><td><button class="btn delete-comment btn-default" data-id="${id}" data-confirm = "Are you sure?">삭제</button></td></tr>`);
 						}
           }else
