@@ -53,7 +53,7 @@
 							data-lng  = google map longitude
 							* used by: assets/js/view/pack_realestate.js
 					-->
-					<a target="_blank" href='https://www.google.com/maps/search/<%= "#{@shop.region} #{@shop.title}" %>' class="btn btn-default btn-sm m-0">
+					<a target="_blank" href='https://www.google.com/maps/search/<%= "#{@shop.address}" %>' class="btn btn-default btn-sm m-0">
 						<i class="fa fa-map-o"></i>
 						FULLSCREEN MAP
 					</a>
@@ -177,7 +177,7 @@
 									data-lng  = google map longitude
 									* used by: assets/js/view/pack_realestate.js
 							-->
-							<a target="_blank" href='https://www.google.com/maps/search/<%= "#{@shop.region} #{@shop.title}" %>' class="btn btn-default btn-block  m-0">
+							<a target="_blank" href='https://www.google.com/maps/search/<%= "#{@shop.address}" %>' class="btn btn-default btn-block  m-0">
 								<i class="fa fa-map-o"></i>
 								MAP
 							</a>
