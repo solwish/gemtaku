@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/solwish/omniauth-naver
+  revision: 1743656ba97df9da799c0c63d7daa2a8a37ab33e
+  specs:
+    omniauth-naver (0.1.0)
+      omniauth-oauth2 (~> 1.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -485,6 +492,7 @@ DEPENDENCIES
   meta_request
   mini_magick
   omniauth-facebook
+  omniauth-naver!
   pg (~> 0.20)
   pry-rails
   pusher

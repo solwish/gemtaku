@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+# naver login
+gem 'omniauth-naver', :git => 'git://github.com/solwish/omniauth-naver'
 # if its not, it can be error
 gem 'simple_form'
 # for db

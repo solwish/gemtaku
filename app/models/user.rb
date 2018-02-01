@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable, omniauth_providers: %i[facebook]
+         :omniauthable#, omniauth_providers: %i[facebook]
 
   has_many :comments
   has_many :escapes
@@ -40,7 +40,9 @@ class User < ActiveRecord::Base
       user.password_confirmation = user.email
       user.name = auth.info.name.delete(' ')   # assuming the user model has a name
       user.nickname = Faker::Name.unique.name.delete(' ').downcase   #위 유효성검사 통과를 위해 faker 변수 사용
-      user.gender = auth.extra.raw_info.gender
+      user.gender = auth.extra.raw_info.gender if user.provider == "facebook"
+      user.gender = auth.info.gender if user.provider == "naver"
+
       user.club_id = 1
       # user.image = auth.info.image # assuming the user model has an image
       # If you are using confirmable and the provider(s) you use validate emails,
