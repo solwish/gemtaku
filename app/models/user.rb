@@ -21,10 +21,10 @@ class User < ActiveRecord::Base
   #                :length => { :minimum => 10, :maximum => 15 }
 
   before_save {self.email = email.downcase}
-  before_save {self.nickname = nickname.downcase}
+  before_create {self.nickname = Faker::Name.unique.name.delete(' ').downcase}
   # before_save {self.club_id = 1}
   VALID_EMAIL_REGEX = /\A([\w+\-]\.?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
-  validates :name, presence: true, length: {maximum: 20}, format: {without: /\s/, :message => "can't use space"}
+  # validates :name, presence: true, length: {maximum: 20}, format: {without: /\s/, :message => "can't use space"}
   validates :nickname, presence: true, length: {maximum: 20}, uniqueness: true, format: {without: /\s/, :message => "can't use space"}
   validates :email, presence: true, length: {maximum: 255},
             format: {with: VALID_EMAIL_REGEX}, uniqueness: {case_sensitive: false}
