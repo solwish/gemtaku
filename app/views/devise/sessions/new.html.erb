@@ -17,6 +17,20 @@
       <div class="box-title mb-30">
         <h2 class="fs-20">Log in</h2>
       </div>
+      <div class="text-center">
+        <a class="btn btn-block btn-social btn-facebook mt-10" href="/users/auth/facebook">
+          <i class="fa fa-facebook"></i> Sign in with Facebook
+        </a>
+        <a class="btn btn-block mt-10 btn-social text-white img-hover" href="/users/auth/naver" style="background-color:#1EC800">
+          <img src="/images/naver.png" alt=""></img> Sign in with NAVER
+        </a>
+        <!-- <a class="btn btn-block btn-social btn-twitter mt-10">
+          <i class="fa fa-twitter"></i> Sign in with Twitter
+        </a> -->
+
+      </div>
+      <hr />
+      <div class="mb-20">&ndash; OR &ndash;</div>
 
       <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <%= f.error_notification %>
@@ -38,7 +52,6 @@
             <div class="form-tip pt-20 text-left">
               <a class="no-text-decoration fs-13 mt-10 block" href="/users/password/new">Forgot Password?</a>
               <a class="no-text-decoration fs-13 mt-10 block" href="/users/sign_up">Sign up</a>
-              <a class="no-text-decoration fs-13 mt-10 block" href="/users/confirmation/new">Didn&#39;t receive confirmation?</a>
             </div>
 
           </div>
@@ -48,14 +61,14 @@
             <button class="btn btn-primary btn-sm"><i class="fa fa-check"></i> LOGIN</button>
 
           </div>
-
+          <div class="col-md-12 col-sm-12 col-xs-12 text-left">
+            <a class="no-text-decoration fs-13 mt-10 block" href="/users/confirmation/new">Didn&#39;t receive confirmation?</a>
+          </div>
         </div>
         <% end %>
       <!-- </form> -->
 
-      <hr />
-
-      <div class="text-center">
+      <!-- <div class="text-center">
         <div class="mb-20">&ndash; OR &ndash;</div>
 
         <a class="btn btn-block btn-social btn-facebook mt-10" href="/users/auth/facebook">
@@ -64,11 +77,8 @@
         <a class="btn btn-block mt-10 btn-social text-white img-hover" href="/users/auth/naver" style="background-color:#1EC800">
           <img src="/images/naver.png" alt=""></img> Sign in with NAVER
         </a>
-        <!-- <a class="btn btn-block btn-social btn-twitter mt-10">
-          <i class="fa fa-twitter"></i> Sign in with Twitter
-        </a> -->
 
-      </div>
+      </div> -->
 
     </div>
 
