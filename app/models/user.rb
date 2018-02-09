@@ -22,6 +22,8 @@ class User < ActiveRecord::Base
 
   before_save {self.email = email.downcase}
   before_create {self.nickname = Faker::Name.unique.name.delete(' ').downcase}
+  before_create {self.club_id = 1}
+
   # before_save {self.club_id = 1}
   VALID_EMAIL_REGEX = /\A([\w+\-]\.?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
   # validates :name, presence: true, length: {maximum: 20}, format: {without: /\s/, :message => "can't use space"}
@@ -34,14 +36,19 @@ class User < ActiveRecord::Base
   end
 
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.email = auth.info.email
+    # where(provider: auth.provider, uid: auth.uid, email: auth.info.email).first_or_create do |user|
+    where(email: auth.info.email).first_or_create do |user|
+      user.provider = auth.provider
+      user.uid = auth.uid
+      # user.email = auth.info.email
       user.password = user.email#Devise.friendly_token[0,20]
       user.password_confirmation = user.email
       user.name = auth.info.name.delete(' ')   # assuming the user model has a name
       user.nickname = Faker::Name.unique.name.delete(' ').downcase   #위 유효성검사 통과를 위해 faker 변수 사용
       user.gender = auth.extra.raw_info.gender if user.provider == "facebook"
       user.gender = auth.info.gender if user.provider == "naver"
+      user.gender = "male" if user.gender == "M"
+      user.gender = "female" if user.gender == "F"
 
       user.club_id = 1
       # user.image = auth.info.image # assuming the user model has an image
