@@ -21,13 +21,14 @@ class User < ActiveRecord::Base
   #                :length => { :minimum => 10, :maximum => 15 }
 
   before_save {self.email = email.downcase}
-  before_create {self.nickname = Faker::Name.unique.name.delete(' ').downcase}
+  # before_update {self.nickname = nickname.strip.downcase}
   before_create {self.club_id = 1}
 
   # before_save {self.club_id = 1}
   VALID_EMAIL_REGEX = /\A([\w+\-]\.?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
   # validates :name, presence: true, length: {maximum: 20}, format: {without: /\s/, :message => "can't use space"}
-  # validates :nickname, presence: true, length: {maximum: 20}, uniqueness: true, format: {without: /\s/, :message => "can't use space"}
+
+  # validates :nickname, length: {maximum: 20}, format: {without: /\s/, :message => "can't use space"}
   validates :email, presence: true, length: {maximum: 255},
             format: {with: VALID_EMAIL_REGEX}, uniqueness: {case_sensitive: false}
 
@@ -41,10 +42,10 @@ class User < ActiveRecord::Base
       user.provider = auth.provider
       user.uid = auth.uid
       # user.email = auth.info.email
-      user.password = user.email#Devise.friendly_token[0,20]
-      user.password_confirmation = user.email
+      user.password = Devise.friendly_token[0,20]
+      # user.password_confirmation = user.email
       user.name = auth.info.name.delete(' ')   # assuming the user model has a name
-      user.nickname = Faker::Name.unique.name.delete(' ').downcase   #위 유효성검사 통과를 위해 faker 변수 사용
+      # user.nickname = Faker::Name.unique.name.delete(' ').downcase   #위 유효성검사 통과를 위해 faker 변수 사용
       user.gender = auth.extra.raw_info.gender if user.provider == "facebook"
       user.gender = auth.info.gender if user.provider == "naver"
       user.gender = "male" if user.gender == "M"

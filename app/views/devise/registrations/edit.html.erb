@@ -10,15 +10,14 @@
         <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
       <% end %>
 
-      <%= f.input :nickname, required: true %>
-      <% if current_user.provider %>
-        <%= f.input :current_password, hint: "초기 비밀번호는 이메일주소입니다 ex) example@naver.com", required: true %>
+      <%= f.input :nickname, required: true, hint: "공백을 제외한 20자까지 입력 가능합니다." %>
+      <% if current_user.is_checked == false || current_user.provider %>
       <% else %>
         <%= f.input :current_password, hint: "we need your current password to confirm your changes", required: true %>
+        <%= f.input :password, autocomplete: "off", hint: "변경하지 않으려면 비워 두세요.", required: false, autofocus: true %>
+        <%= f.input :password_confirmation, required: false %>
       <% end %>
       <hr>
-      <%= f.input :password, autocomplete: "off", hint: "변경하지 않으려면 비워 두세요.", required: false, autofocus: true %>
-      <%= f.input :password_confirmation, required: false %>
     </div>
 
     <div class="form-actions">

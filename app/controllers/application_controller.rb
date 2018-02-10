@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :check_user!, except: [:edit, :destroy, :update]
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -18,6 +19,11 @@ class ApplicationController < ActionController::Base
 
   # helper_method :check_admin
 
+  def check_user!
+    if current_user && current_user.is_checked == false
+      redirect_to edit_user_registration_path, notice: '추가정보를 입력해 주세요.'
+    end
+  end
 
   protected
 
